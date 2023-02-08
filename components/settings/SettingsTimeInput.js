@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import SettingsInput from "./SettingsInput";
-import inputStyles from "../input/inputStyles";
+import settingsInputStyles from "../settings/settingsInputStyles";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 
 export default function SettingsTimeInput({ title, details }) {
@@ -19,7 +19,7 @@ export default function SettingsTimeInput({ title, details }) {
   return (
     <TouchableOpacityRipple onPress={() => setShow(true)}>
       <SettingsInput title={title} details={details}>
-        <Text style={inputStyles.inputValue}>{shortTime}</Text>
+        <Text style={settingsInputStyles.inputValue}>{shortTime}</Text>
 
         {show && (
           <DateTimePicker
