@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Text } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import SettingsInput from "./SettingsInput";
-import settingsInputStyles from "../settings/settingsInputStyles";
-import TouchableOpacityRipple from "../TouchableOpacityRipple";
+import Input from "./Input";
+import { inputStyles } from "./inputStyles";
 
-export default function SettingsTimeInput({ title, details }) {
+export default function InputDate({ title, details }) {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
@@ -17,12 +16,11 @@ export default function SettingsTimeInput({ title, details }) {
   const shortTime = date.toTimeString().slice(0, 5);
 
   return (
-    <TouchableOpacityRipple
-      onPress={() => setShow(true)}
-      paddingHorizontal={10}
-    >
-      <SettingsInput title={title} details={details}>
-        <Text style={settingsInputStyles.inputValue}>{shortTime}</Text>
+    <Input title={title} details={details}>
+      <TouchableOpacity onPress={() => setShow(true)}>
+        <View style={inputStyles.inputBox}>
+          <Text style={inputStyles.inputValue}>{shortTime}</Text>
+        </View>
 
         {show && (
           <DateTimePicker
@@ -33,7 +31,7 @@ export default function SettingsTimeInput({ title, details }) {
             onChange={onChange}
           />
         )}
-      </SettingsInput>
-    </TouchableOpacityRipple>
+      </TouchableOpacity>
+    </Input>
   );
 }

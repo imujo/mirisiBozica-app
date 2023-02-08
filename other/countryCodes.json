@@ -1,0 +1,823 @@
+[
+  {
+    "dialNum": 93,
+    "name": "Afghanistan"
+  },
+  {
+    "dialNum": 355,
+    "name": "Albania"
+  },
+  {
+    "dialNum": 213,
+    "name": "Algeria"
+  },
+
+  {
+    "dialNum": 376,
+    "name": "Andorra"
+  },
+  {
+    "dialNum": 244,
+    "name": "Angola"
+  },
+
+  {
+    "dialNum": "1-268",
+    "name": "Antigua and Barbuda"
+  },
+  {
+    "dialNum": 54,
+    "name": "Argentina"
+  },
+  {
+    "dialNum": 374,
+    "name": "Armenia"
+  },
+
+  {
+    "dialNum": 61,
+    "name": "Australia"
+  },
+  {
+    "dialNum": 43,
+    "name": "Austria"
+  },
+  {
+    "dialNum": 994,
+    "name": "Azerbaijan"
+  },
+  {
+    "dialNum": "1-242",
+    "name": "Bahamas (the)"
+  },
+  {
+    "dialNum": 973,
+    "name": "Bahrain"
+  },
+  {
+    "dialNum": 880,
+    "name": "Bangladesh"
+  },
+  {
+    "dialNum": "1-246",
+    "name": "Barbados"
+  },
+  {
+    "dialNum": 375,
+    "name": "Belarus"
+  },
+  {
+    "dialNum": 32,
+    "name": "Belgium"
+  },
+  {
+    "dialNum": 501,
+    "name": "Belize"
+  },
+  {
+    "dialNum": 229,
+    "name": "Benin"
+  },
+
+  {
+    "dialNum": 975,
+    "name": "Bhutan"
+  },
+  {
+    "dialNum": 591,
+    "name": "Bolivia (Plurinational State of)"
+  },
+
+  {
+    "dialNum": 387,
+    "name": "Bosnia and Herzegovina"
+  },
+  {
+    "dialNum": 267,
+    "name": "Botswana"
+  },
+
+  {
+    "dialNum": 55,
+    "name": "Brazil"
+  },
+
+  {
+    "dialNum": 673,
+    "name": "Brunei Darussalam"
+  },
+  {
+    "dialNum": 359,
+    "name": "Bulgaria"
+  },
+  {
+    "dialNum": 226,
+    "name": "Burkina Faso"
+  },
+  {
+    "dialNum": 257,
+    "name": "Burundi"
+  },
+  {
+    "dialNum": 238,
+    "name": "Cabo Verde"
+  },
+  {
+    "dialNum": 855,
+    "name": "Cambodia"
+  },
+  {
+    "dialNum": 237,
+    "name": "Cameroon"
+  },
+  {
+    "dialNum": 1,
+    "name": "Canada"
+  },
+
+  {
+    "dialNum": 236,
+    "name": "Central African Republic (the)"
+  },
+  {
+    "dialNum": 235,
+    "name": "Chad"
+  },
+  {
+    "dialNum": 56,
+    "name": "Chile"
+  },
+  {
+    "dialNum": 86,
+    "name": "China"
+  },
+
+  {
+    "dialNum": 57,
+    "name": "Colombia"
+  },
+  {
+    "dialNum": 269,
+    "name": "Comoros (the)"
+  },
+  {
+    "dialNum": 242,
+    "name": "Congo (the)"
+  },
+  {
+    "dialNum": 682,
+    "name": "Cook Islands (the)    **"
+  },
+  {
+    "dialNum": 506,
+    "name": "Costa Rica"
+  },
+  {
+    "dialNum": 385,
+    "name": "Croatia"
+  },
+  {
+    "dialNum": 53,
+    "name": "Cuba"
+  },
+
+  {
+    "dialNum": 357,
+    "name": "Cyprus"
+  },
+  {
+    "dialNum": 420,
+    "name": "Czech Republic (the)"
+  },
+  {
+    "dialNum": 225,
+    "name": "Côte d'Ivoire"
+  },
+  {
+    "dialNum": 850,
+    "name": "Democratic People's Republic of Korea (the)"
+  },
+  {
+    "dialNum": 243,
+    "name": "Democratic Republic of the Congo (the)"
+  },
+  {
+    "dialNum": 45,
+    "name": "Denmark"
+  },
+  {
+    "dialNum": 253,
+    "name": "Djibouti"
+  },
+  {
+    "dialNum": "1-767",
+    "name": "Dominica"
+  },
+  {
+    "dialNum": "1-809,1-829,1-849",
+    "name": "Dominican Republic (the)"
+  },
+  {
+    "dialNum": 593,
+    "name": "Ecuador"
+  },
+  {
+    "dialNum": 20,
+    "name": "Egypt"
+  },
+  {
+    "dialNum": 503,
+    "name": "El Salvador"
+  },
+  {
+    "dialNum": 240,
+    "name": "Equatorial Guinea"
+  },
+  {
+    "dialNum": 291,
+    "name": "Eritrea"
+  },
+  {
+    "dialNum": 372,
+    "name": "Estonia"
+  },
+
+  {
+    "dialNum": 251,
+    "name": "Ethiopia"
+  },
+
+  {
+    "dialNum": 679,
+    "name": "Fiji"
+  },
+  {
+    "dialNum": 358,
+    "name": "Finland"
+  },
+  {
+    "dialNum": 33,
+    "name": "France"
+  },
+
+  {
+    "dialNum": 241,
+    "name": "Gabon"
+  },
+  {
+    "dialNum": 220,
+    "name": "Gambia (the)"
+  },
+  {
+    "dialNum": 995,
+    "name": "Georgia"
+  },
+  {
+    "dialNum": 49,
+    "name": "Germany"
+  },
+  {
+    "dialNum": 233,
+    "name": "Ghana"
+  },
+
+  {
+    "dialNum": 30,
+    "name": "Greece"
+  },
+
+  {
+    "dialNum": "1-473",
+    "name": "Grenada"
+  },
+
+  {
+    "dialNum": 502,
+    "name": "Guatemala"
+  },
+
+  {
+    "dialNum": 224,
+    "name": "Guinea"
+  },
+  {
+    "dialNum": 245,
+    "name": "Guinea-Bissau"
+  },
+  {
+    "dialNum": 592,
+    "name": "Guyana"
+  },
+  {
+    "dialNum": 509,
+    "name": "Haiti"
+  },
+
+  {
+    "dialNum": "39-06",
+    "name": "Holy See (the)  *"
+  },
+  {
+    "dialNum": 504,
+    "name": "Honduras"
+  },
+  {
+    "dialNum": 36,
+    "name": "Hungary"
+  },
+  {
+    "dialNum": 354,
+    "name": "Iceland"
+  },
+  {
+    "dialNum": 91,
+    "name": "India"
+  },
+  {
+    "dialNum": 62,
+    "name": "Indonesia"
+  },
+  {
+    "dialNum": 98,
+    "name": "Iran (Islamic Republic of)"
+  },
+  {
+    "dialNum": 964,
+    "name": "Iraq"
+  },
+  {
+    "dialNum": 353,
+    "name": "Ireland"
+  },
+
+  {
+    "dialNum": 972,
+    "name": "Israel"
+  },
+  {
+    "dialNum": 39,
+    "name": "Italy"
+  },
+  {
+    "dialNum": "1-876",
+    "name": "Jamaica"
+  },
+  {
+    "dialNum": 81,
+    "name": "Japan"
+  },
+
+  {
+    "dialNum": 962,
+    "name": "Jordan"
+  },
+  {
+    "dialNum": 7,
+    "name": "Kazakhstan"
+  },
+  {
+    "dialNum": 254,
+    "name": "Kenya"
+  },
+  {
+    "dialNum": 686,
+    "name": "Kiribati"
+  },
+  {
+    "dialNum": 965,
+    "name": "Kuwait"
+  },
+  {
+    "dialNum": 996,
+    "name": "Kyrgyzstan"
+  },
+  {
+    "dialNum": 856,
+    "name": "Lao People's Democratic Republic (the)"
+  },
+  {
+    "dialNum": 371,
+    "name": "Latvia"
+  },
+  {
+    "dialNum": 961,
+    "name": "Lebanon"
+  },
+  {
+    "dialNum": 266,
+    "name": "Lesotho"
+  },
+  {
+    "dialNum": 231,
+    "name": "Liberia"
+  },
+  {
+    "dialNum": 218,
+    "name": "Libya"
+  },
+  {
+    "dialNum": 423,
+    "name": "Liechtenstein"
+  },
+  {
+    "dialNum": 370,
+    "name": "Lithuania"
+  },
+  {
+    "dialNum": 352,
+    "name": "Luxembourg"
+  },
+  {
+    "dialNum": 261,
+    "name": "Madagascar"
+  },
+  {
+    "dialNum": 265,
+    "name": "Malawi"
+  },
+  {
+    "dialNum": 60,
+    "name": "Malaysia"
+  },
+  {
+    "dialNum": 960,
+    "name": "Maldives"
+  },
+  {
+    "dialNum": 223,
+    "name": "Mali"
+  },
+  {
+    "dialNum": 356,
+    "name": "Malta"
+  },
+  {
+    "dialNum": 692,
+    "name": "Marshall Islands (the)"
+  },
+
+  {
+    "dialNum": 222,
+    "name": "Mauritania"
+  },
+  {
+    "dialNum": 230,
+    "name": "Mauritius"
+  },
+
+  {
+    "dialNum": 52,
+    "name": "Mexico"
+  },
+  {
+    "dialNum": 691,
+    "name": "Micronesia (Federated States of)"
+  },
+  {
+    "dialNum": 377,
+    "name": "Monaco"
+  },
+  {
+    "dialNum": 976,
+    "name": "Mongolia"
+  },
+  {
+    "dialNum": 382,
+    "name": "Montenegro"
+  },
+
+  {
+    "dialNum": 212,
+    "name": "Morocco"
+  },
+  {
+    "dialNum": 258,
+    "name": "Mozambique"
+  },
+  {
+    "dialNum": 95,
+    "name": "Myanmar"
+  },
+  {
+    "dialNum": 264,
+    "name": "Namibia"
+  },
+  {
+    "dialNum": 674,
+    "name": "Nauru"
+  },
+  {
+    "dialNum": 977,
+    "name": "Nepal"
+  },
+  {
+    "dialNum": 31,
+    "name": "Netherlands (the)"
+  },
+
+  {
+    "dialNum": 64,
+    "name": "New Zealand"
+  },
+  {
+    "dialNum": 505,
+    "name": "Nicaragua"
+  },
+  {
+    "dialNum": 227,
+    "name": "Niger (the)"
+  },
+  {
+    "dialNum": 234,
+    "name": "Nigeria"
+  },
+  {
+    "dialNum": 683,
+    "name": "Niue    **"
+  },
+
+  {
+    "dialNum": 47,
+    "name": "Norway"
+  },
+  {
+    "dialNum": 968,
+    "name": "Oman"
+  },
+  {
+    "dialNum": 92,
+    "name": "Pakistan"
+  },
+  {
+    "dialNum": 680,
+    "name": "Palau"
+  },
+  {
+    "dialNum": 507,
+    "name": "Panama"
+  },
+  {
+    "dialNum": 675,
+    "name": "Papua New Guinea"
+  },
+  {
+    "dialNum": 595,
+    "name": "Paraguay"
+  },
+  {
+    "dialNum": 51,
+    "name": "Peru"
+  },
+  {
+    "dialNum": 63,
+    "name": "Philippines (the)"
+  },
+
+  {
+    "dialNum": 48,
+    "name": "Poland"
+  },
+  {
+    "dialNum": 351,
+    "name": "Portugal"
+  },
+
+  {
+    "dialNum": 974,
+    "name": "Qatar"
+  },
+  {
+    "dialNum": 82,
+    "name": "Republic of Korea (the)"
+  },
+  {
+    "dialNum": 373,
+    "name": "Republic of Moldova (the)"
+  },
+  {
+    "dialNum": 40,
+    "name": "Romania"
+  },
+  {
+    "dialNum": 7,
+    "name": "Russian Federation (the)"
+  },
+  {
+    "dialNum": 250,
+    "name": "Rwanda"
+  },
+
+  {
+    "dialNum": "1-869",
+    "name": "Saint Kitts and Nevis"
+  },
+  {
+    "dialNum": "1-758",
+    "name": "Saint Lucia"
+  },
+
+  {
+    "dialNum": "1-784",
+    "name": "Saint Vincent and the Grenadines"
+  },
+  {
+    "dialNum": 685,
+    "name": "Samoa"
+  },
+  {
+    "dialNum": 378,
+    "name": "San Marino"
+  },
+  {
+    "dialNum": 239,
+    "name": "Sao Tome and Principe"
+  },
+
+  {
+    "dialNum": 966,
+    "name": "Saudi Arabia"
+  },
+  {
+    "dialNum": 221,
+    "name": "Senegal"
+  },
+  {
+    "dialNum": 381,
+    "name": "Serbia"
+  },
+  {
+    "dialNum": 248,
+    "name": "Seychelles"
+  },
+  {
+    "dialNum": 232,
+    "name": "Sierra Leone"
+  },
+  {
+    "dialNum": 65,
+    "name": "Singapore"
+  },
+
+  {
+    "dialNum": 421,
+    "name": "Slovakia"
+  },
+  {
+    "dialNum": 386,
+    "name": "Slovenia"
+  },
+  {
+    "dialNum": 677,
+    "name": "Solomon Islands"
+  },
+  {
+    "dialNum": 252,
+    "name": "Somalia"
+  },
+  {
+    "dialNum": 27,
+    "name": "South Africa"
+  },
+
+  {
+    "dialNum": 211,
+    "name": "South Sudan"
+  },
+  {
+    "dialNum": 34,
+    "name": "Spain"
+  },
+  {
+    "dialNum": 94,
+    "name": "Sri Lanka"
+  },
+  {
+    "dialNum": 970,
+    "name": "State of Palestine  *"
+  },
+  {
+    "dialNum": 249,
+    "name": "Sudan (the)"
+  },
+  {
+    "dialNum": 597,
+    "name": "Suriname"
+  },
+
+  {
+    "dialNum": 46,
+    "name": "Sweden"
+  },
+  {
+    "dialNum": 41,
+    "name": "Switzerland"
+  },
+  {
+    "dialNum": 963,
+    "name": "Syrian Arab Republic"
+  },
+  {
+    "dialNum": 992,
+    "name": "Tajikistan"
+  },
+  {
+    "dialNum": 66,
+    "name": "Thailand"
+  },
+  {
+    "dialNum": 389,
+    "name": "the former Yugoslav Republic of Macedonia"
+  },
+  {
+    "dialNum": 670,
+    "name": "Timor-Leste"
+  },
+  {
+    "dialNum": 228,
+    "name": "Togo"
+  },
+
+  {
+    "dialNum": 676,
+    "name": "Tonga"
+  },
+  {
+    "dialNum": "1-868",
+    "name": "Trinidad and Tobago"
+  },
+  {
+    "dialNum": 216,
+    "name": "Tunisia"
+  },
+  {
+    "dialNum": 90,
+    "name": "Turkey"
+  },
+  {
+    "dialNum": 993,
+    "name": "Turkmenistan"
+  },
+
+  {
+    "dialNum": 688,
+    "name": "Tuvalu"
+  },
+  {
+    "dialNum": 256,
+    "name": "Uganda"
+  },
+  {
+    "dialNum": 380,
+    "name": "Ukraine"
+  },
+  {
+    "dialNum": 971,
+    "name": "United Arab Emirates (the)"
+  },
+  {
+    "dialNum": 44,
+    "name": "United Kingdom of Great Britain and Northern Ireland (the)"
+  },
+  {
+    "dialNum": 255,
+    "name": "United Republic of Tanzania (the)"
+  },
+
+  {
+    "dialNum": 1,
+    "name": "United States of America (the)"
+  },
+  {
+    "dialNum": 598,
+    "name": "Uruguay"
+  },
+  {
+    "dialNum": 998,
+    "name": "Uzbekistan"
+  },
+  {
+    "dialNum": 678,
+    "name": "Vanuatu"
+  },
+  {
+    "dialNum": 58,
+    "name": "Venezuela (Bolivarian Republic of)"
+  },
+  {
+    "dialNum": 84,
+    "name": "Viet Nam"
+  },
+
+  {
+    "dialNum": 967,
+    "name": "Yemen"
+  },
+  {
+    "dialNum": 260,
+    "name": "Zambia"
+  },
+  {
+    "dialNum": 263,
+    "name": "Zimbabwe"
+  }
+]
