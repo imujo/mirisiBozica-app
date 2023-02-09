@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { inputStyles } from "../input/inputStyles";
+import { inputStyles } from "./helpers/inputStyles";
 /* 
 INPUT TYPES
 
@@ -14,13 +14,16 @@ INPUT TYPES
 */
 
 export default function Input(props) {
+  const { title, details, isError, errorMsg } = props;
   return (
     <View style={inputStyles.inputWrapper}>
-      <Text style={inputStyles.title}>{props.title}</Text>
+      <Text style={[inputStyles.title]}>{title}</Text>
 
       {props.children}
-      {props.details && (
-        <Text style={inputStyles.details}>{props.details}</Text>
+      {details && (
+        <Text style={[inputStyles.details, isError && inputStyles.text_error]}>
+          {isError ? errorMsg : details}
+        </Text>
       )}
     </View>
   );

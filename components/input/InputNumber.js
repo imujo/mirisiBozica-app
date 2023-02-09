@@ -1,19 +1,28 @@
 import Input from "./Input";
 import { TextInput, Text } from "react-native";
-import { inputStyles } from "./inputStyles";
+import { inputStyles } from "./helpers/inputStyles";
 
 export default function InputNumber({
   title,
   details,
   placeholder,
-  capitalize,
+  isError,
+  errorMsg,
 }) {
   return (
-    <Input title={title} details={details}>
+    <Input
+      title={title}
+      details={details}
+      isError={isError}
+      errorMsg={errorMsg}
+    >
       <TextInput
-        style={inputStyles.inputBox}
+        style={[
+          inputStyles.inputBox,
+          inputStyles.inputValue,
+          isError && inputStyles.inputBox_error,
+        ]}
         placeholder={placeholder}
-        autoCapitalize={capitalize}
         keyboardType="numeric"
       />
     </Input>

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import TouchableOpacityRipple from "../TouchableOpacityRipple";
-import CustomModal from "../CustomModal";
+import TouchableOpacityRipple from "../../TouchableOpacityRipple";
+import CustomModal from "../../CustomModal";
 
 export default function InputSelectPage({
   modalOpen,
@@ -35,7 +35,7 @@ export default function InputSelectPage({
 }
 
 function InputSelectPageItem(props) {
-  const { id, prostorijaTitle } = props.item;
+  const { id, title } = props.item;
   const { selectedOption, setSelectedOption, navigation, closeModal } = props;
 
   const select = () => {
@@ -51,7 +51,7 @@ function InputSelectPageItem(props) {
           selectedOption == id && localStyles.itemSelected,
         ]}
       >
-        <Text>{prostorijaTitle}</Text>
+        <Text>{title}</Text>
       </View>
     </TouchableOpacityRipple>
   );

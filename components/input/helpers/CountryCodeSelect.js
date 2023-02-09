@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import countryCodes from "../other/countryCodes.json";
-import CustomModal from "./CustomModal";
-import TouchableOpacityRipple from "./TouchableOpacityRipple";
+import countryCodes from "../../../other/countryCodes.json";
+import CustomModal from "../../CustomModal";
+import TouchableOpacityRipple from "../../TouchableOpacityRipple";
 export default function CountryCodeSelect({
   modalOpen,
   closeModal,

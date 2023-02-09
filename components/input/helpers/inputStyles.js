@@ -2,13 +2,17 @@ import { StyleSheet } from "react-native";
 
 export const inputStyles = StyleSheet.create({
   title: {
-    fontSize: 15,
+    fontSize: 14,
     marginBottom: 8,
+  },
+  text_error: {
+    color: "red",
   },
   details: {
     fontSize: 10,
     marginTop: 5,
   },
+
   inputBox: {
     borderWidth: 2,
     borderColor: "gray",
@@ -16,13 +20,16 @@ export const inputStyles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 7,
     backgroundColor: "white",
-    color: "gray",
     minWidth: 200,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
   },
+  inputBox_error: {
+    borderColor: "red",
+  },
   inputValue: {
     fontSize: 16,
+    color: "#4f4f4f",
   },
 });

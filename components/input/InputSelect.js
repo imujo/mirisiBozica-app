@@ -1,10 +1,10 @@
 import Input from "./Input";
 import { Text, View, StyleSheet } from "react-native";
-import { inputStyles } from "./inputStyles";
+import { inputStyles } from "./helpers/inputStyles";
 import { AntDesign } from "@expo/vector-icons";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 import { useState } from "react";
-import InputSelectModal from "./InputSelectModal";
+import InputSelectModal from "./helpers/InputSelectModal";
 
 export default function InputSelect({
   title,
@@ -13,13 +13,26 @@ export default function InputSelect({
   options,
   selectedOption,
   setSelectedOption,
+  isError,
+  errorMsg,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <Input title={title} details={details}>
+    <Input
+      title={title}
+      details={details}
+      isError={isError}
+      errorMsg={errorMsg}
+    >
       <TouchableOpacityRipple onPress={() => setModalOpen(true)}>
-        <View style={[inputStyles.inputBox, localStyles.inputBox]}>
+        <View
+          style={[
+            inputStyles.inputBox,
+            localStyles.inputBox,
+            isError && inputStyles.inputBox_error,
+          ]}
+        >
           <InputSelectModal
             modalOpen={modalOpen}
             closeModal={() => setModalOpen(false)}
@@ -28,10 +41,9 @@ export default function InputSelect({
             setSelectedOption={setSelectedOption}
             selectModalTitle={selectModalTitle}
           />
-          <Text>
+          <Text style={inputStyles.inputValue}>
             {selectedOption != -1
-              ? options.find((item) => item.id == selectedOption)
-                  .prostorijaTitle
+              ? options.find((item) => item.id == selectedOption).title
               : "Označi"}
           </Text>
           <AntDesign name="down" size={20} color="gray" />
