@@ -1,6 +1,9 @@
 import { StyleSheet } from "react-native";
 
 export const inputStyles = StyleSheet.create({
+  inputWrapper: {
+    width: "100%",
+  },
   title: {
     fontSize: 14,
     marginBottom: 8,

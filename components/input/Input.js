@@ -1,17 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
-/* 
-INPUT TYPES
-
-- text
-- time
-- date
-- number
-- phone
-- select
-- text area
-*/
 
 export default function Input(props) {
   const { title, details, isError, errorMsg } = props;

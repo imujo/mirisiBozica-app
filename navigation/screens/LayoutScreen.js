@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import InputPhone from "../../components/input/InputPhone";
 import InputSelect from "../../components/input/InputSelect";
 import InputText from "../../components/input/InputText";
+import InputTextArea from "../../components/input/InputTextArea";
 import InputNumber from "../../components/input/InputNumber";
 import InputTime from "../../components/input/InputTime";
 import InputDate from "../../components/input/InputTime";
@@ -60,6 +61,14 @@ export default function LayoutScreen({ navigation }) {
         ]}
         selectedOption={opitonSelected}
         setSelectedOption={setOpitonSelected}
+      />
+      <InputTextArea
+        isError={false}
+        errorMsg="This is an error message!"
+        title="Text input"
+        details="Ovo je tekstualni input"
+        placeholder="Upisi tekst"
+        numberOfLines={4}
       />
     </View>
   );

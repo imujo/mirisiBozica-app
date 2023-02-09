@@ -1,13 +1,12 @@
 import Input from "./Input";
-import { TextInput } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
 
 export default function InputText({
   title,
   details,
   placeholder,
-  capitalize,
-
+  numberOfLines,
   isError,
   errorMsg,
 }) {
@@ -22,11 +21,17 @@ export default function InputText({
         style={[
           inputStyles.inputBox,
           inputStyles.inputValue,
+          localStyles.input,
           isError && inputStyles.inputBox_error,
         ]}
         placeholder={placeholder}
-        autoCapitalize={capitalize}
+        multiline={true}
+        numberOfLines={numberOfLines}
       />
     </Input>
   );
 }
+
+const localStyles = StyleSheet.create({
+  input: { textAlignVertical: "top" },
+});
