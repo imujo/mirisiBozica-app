@@ -18,6 +18,9 @@ export const inputStyles = StyleSheet.create({
     backgroundColor: "white",
     color: "gray",
     minWidth: 200,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
   inputValue: {
     fontSize: 16,

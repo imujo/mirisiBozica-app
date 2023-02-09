@@ -1,5 +1,5 @@
 import Input from "./Input";
-import { TextInput, Text } from "react-native";
+import { TextInput } from "react-native";
 import { inputStyles } from "./inputStyles";
 
 export default function InputText({ title, details, placeholder, capitalize }) {

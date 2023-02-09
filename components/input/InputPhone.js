@@ -19,13 +19,15 @@ export default function InputPhone({
     <Input title={title} details={details}>
       <View style={[inputStyles.inputBox, localStyles.input]}>
         <TouchableOpacityRipple onPress={() => setCountryCodeModalOpen(true)}>
-          <CountryCodeSelect
-            modalOpen={countryCodeModalOpen}
-            setModalOpen={setCountryCodeModalOpen}
-            countryCodeSelected={countryCodeSelected}
-            setCountryCodeSelected={setCountryCodeSelected}
-          />
-          <Text>+{countryCodeSelected} | </Text>
+          <View>
+            <CountryCodeSelect
+              modalOpen={countryCodeModalOpen}
+              closeModal={() => setCountryCodeModalOpen(false)}
+              countryCodeSelected={countryCodeSelected}
+              setCountryCodeSelected={setCountryCodeSelected}
+            />
+            <Text>+{countryCodeSelected} | </Text>
+          </View>
         </TouchableOpacityRipple>
         <TextInput placeholder="917835462" keyboardType="numeric" />
       </View>

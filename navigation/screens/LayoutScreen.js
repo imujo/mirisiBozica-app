@@ -1,15 +1,27 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Button } from "react-native";
 import InputPhone from "../../components/input/InputPhone";
+import InputSelect from "../../components/input/InputSelect";
+import InputText from "../../components/input/InputText";
 
-export default function LayoutScreen() {
+export default function LayoutScreen({ navigation }) {
+  const [opitonSelected, setOpitonSelected] = useState(-1);
   return (
     <View style={styles.temp}>
-      <InputPhone
+      <InputSelect
         title="Broj odraslih"
         details="Prezime gosta"
-        placeholder="Broj odraslih"
+        selectModalTitle={"Oznaci prostoriju"}
+        navigation={navigation}
+        options={[
+          { id: 1, prostorijaTitle: "Prostorija 1" },
+          { id: 2, prostorijaTitle: "Prostorija 2" },
+          { id: 3, prostorijaTitle: "Prostorija 3" },
+        ]}
+        selectedOption={opitonSelected}
+        setSelectedOption={setOpitonSelected}
       />
+      <InputPhone />
     </View>
   );
 }

@@ -2,18 +2,6 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import settingsInputStyles from "../settings/settingsInputStyles";
 
-/* 
-INPUT TYPES
-
-- text
-- time
-- date
-- number
-- phone
-- select
-- text area
-*/
-
 export default function SettingsInput(props) {
   return (
     <View style={settingsInputStyles.inputWrapper}>

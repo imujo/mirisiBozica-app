@@ -1,38 +1,27 @@
-import { StyleSheet, Text, View, Button, FlatList } from "react-native";
-import Modal from "react-native-modal";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import countryCodes from "../other/countryCodes.json";
+import CustomModal from "./CustomModal";
 import TouchableOpacityRipple from "./TouchableOpacityRipple";
 export default function CountryCodeSelect({
   modalOpen,
-  setModalOpen,
+  closeModal,
   countryCodeSelected,
   setCountryCodeSelected,
 }) {
-  const closeModal = () => {
-    setModalOpen(false);
-  };
   return (
-    <Modal
-      isVisible={modalOpen}
-      onBackButtonPress={closeModal}
-      onBackdropPress={closeModal}
-    >
-      <View style={styles.modal}>
-        <FlatList
-          data={countryCodes}
-          renderItem={({ item }) => (
-            <CountryCodeItem
-              {...item}
-              countryCodeSelected={countryCodeSelected}
-              setCountryCodeSelected={setCountryCodeSelected}
-              closeModal={closeModal}
-            />
-          )}
-        ></FlatList>
-
-        {/* <Button title="Hide modal" onPress={closeModal} /> */}
-      </View>
-    </Modal>
+    <CustomModal isOpen={modalOpen} close={closeModal} title="Označi državu">
+      <FlatList
+        data={countryCodes}
+        renderItem={({ item }) => (
+          <CountryCodeItem
+            {...item}
+            countryCodeSelected={countryCodeSelected}
+            setCountryCodeSelected={setCountryCodeSelected}
+            closeModal={closeModal}
+          />
+        )}
+      ></FlatList>
+    </CustomModal>
   );
 }
 
@@ -59,12 +48,7 @@ function CountryCodeItem(props) {
 }
 
 const styles = StyleSheet.create({
-  modal: {
-    flex: 1,
-    backgroundColor: "white",
-  },
   countryCodeItem: {
-    paddingHorizontal: 15,
     paddingVertical: 10,
     display: "flex",
     flexDirection: "row",
