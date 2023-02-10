@@ -3,20 +3,40 @@ import { Text, View, StyleSheet } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
 import { AntDesign } from "@expo/vector-icons";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import InputSelectModal from "./helpers/InputSelectScreen";
+import useFetch from "../../hooks/useFetch";
 
 export default function InputSelect({
   title,
   details,
-  fetchUrl,
+  allDataUrl,
+  selectDataUrl,
   isError,
   errorMsg,
   navigation,
   prevPage,
   multiple,
+  selectedItemIds,
 }) {
-  const [modalOpen, setModalOpen] = useState(false);
+  const { loading, error, value } = useFetch(
+    {
+      method: "GET",
+      url: selectDataUrl,
+      params: {
+        table_ids: selectedItemIds,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+    [selectedItemIds]
+  );
+
+  const [selectedIds, setSelectedIds] = useState(selectedItemIds);
+  useEffect(() => {
+    setSelectedIds(selectedItemIds);
+  }, [selectedItemIds]);
 
   return (
     <Input
@@ -29,7 +49,7 @@ export default function InputSelect({
         // onPress={() => setModalOpen(true)}
         onPress={() =>
           navigation.navigate("Select", {
-            fetchUrl: fetchUrl,
+            fetchUrl: allDataUrl,
             header: title,
             prevPage: prevPage,
             multiple: multiple,
@@ -43,17 +63,30 @@ export default function InputSelect({
             isError && inputStyles.inputBox_error,
           ]}
         >
-          {/* <InputSelectModal
-            modalOpen={modalOpen}
-            closeModal={() => setModalOpen(false)}
-            fetchUrl={fetchUrl}
-            selectModalTitle={title}
-          /> */}
-          <Text style={inputStyles.inputValue}>
-            {/* {selectedOption != -1
-              ? options.find((item) => item.id == selectedOption).title
-              : "Označi"} */}
-          </Text>
+          <View style={localStyles.selectedItemsSection}>
+            {error ? (
+              <Text style={inputStyles.inputValue}>Error</Text>
+            ) : loading ? (
+              <Text style={inputStyles.inputValue}>Loading</Text>
+            ) : value.length ? (
+              value.map((item, i) => {
+                return (
+                  <Text
+                    style={[
+                      localStyles.selectedItemText,
+                      localStyles.selectedItem,
+                    ]}
+                    key={i}
+                  >
+                    {item.title}
+                  </Text>
+                );
+              })
+            ) : (
+              <Text>Oznaci</Text>
+            )}
+          </View>
+
           <AntDesign name="down" size={20} color="gray" />
         </View>
       </TouchableOpacityRipple>
@@ -64,5 +97,24 @@ export default function InputSelect({
 const localStyles = StyleSheet.create({
   inputBox: {
     justifyContent: "space-between",
+  },
+  selectedItemsSection: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  selectedItem: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "lightgray",
+    marginHorizontal: 5,
+    marginVertical: 7,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  selectedItemText: {
+    fontSize: 10,
+    marginRight: 8,
   },
 });

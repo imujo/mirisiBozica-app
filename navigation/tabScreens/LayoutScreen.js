@@ -15,10 +15,6 @@ import InputTime from "../../components/input/InputTime";
 import InputDate from "../../components/input/InputTime";
 
 export default function LayoutScreen({ navigation, route }) {
-  useEffect(() => {
-    console.log(route.params?.ProstorijaIds);
-  }, [route.params?.ProstorijaIds]);
-
   const [opitonSelected, setOpitonSelected] = useState(-1);
   return (
     <View style={styles.temp}>
@@ -81,10 +77,12 @@ export default function LayoutScreen({ navigation, route }) {
         errorMsg="This is an error message!"
         title="Prostorija"
         details="Ovo je oznaci input"
-        fetchUrl="http://192.168.8.102:3001/table/room?user_id=1&room_id=8"
+        allDataUrl="http://192.168.8.102:3001/table/room?user_id=1&room_id=8"
+        selectDataUrl="http://192.168.8.102:3001/table/ids"
         prevPage="Home"
         navigation={navigation}
         multiple={true}
+        selectedItemIds={route.params?.ProstorijaIds}
       />
     </View>
   );
