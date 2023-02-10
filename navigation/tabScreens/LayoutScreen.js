@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Button,
+  TouchableHighlight,
+} from "react-native";
 import InputPhone from "../../components/input/InputPhone";
 import InputSelect from "../../components/input/InputSelect";
 import InputText from "../../components/input/InputText";
@@ -12,7 +18,7 @@ export default function LayoutScreen({ navigation }) {
   const [opitonSelected, setOpitonSelected] = useState(-1);
   return (
     <View style={styles.temp}>
-      <InputText
+      {/* <InputText
         isError={false}
         errorMsg="This is an error message!"
         title="Text input"
@@ -69,6 +75,15 @@ export default function LayoutScreen({ navigation }) {
         details="Ovo je tekstualni input"
         placeholder="Upisi tekst"
         numberOfLines={4}
+      /> */}
+      <Button
+        title="Add Event"
+        onPress={() =>
+          navigation.navigate("Event", {
+            header: "Dodaj gosta",
+            type: "view", // add | view | update
+          })
+        }
       />
     </View>
   );

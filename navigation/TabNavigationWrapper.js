@@ -2,10 +2,10 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // Screens
-import SettingsScreen from "./screens/SettingsScreen";
-import LayoutScreen from "./screens/LayoutScreen";
-import CalendarScreen from "./screens/CalendarScreen";
-import { Text, View } from "react-native";
+import SettingsScreen from "./tabScreens/SettingsScreen";
+import LayoutScreen from "./tabScreens/LayoutScreen";
+import CalendarScreen from "./tabScreens/CalendarScreen";
+import { Text } from "react-native";
 
 // Screen names
 const screenNames = {
