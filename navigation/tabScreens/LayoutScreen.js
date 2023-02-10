@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,7 +14,11 @@ import InputNumber from "../../components/input/InputNumber";
 import InputTime from "../../components/input/InputTime";
 import InputDate from "../../components/input/InputTime";
 
-export default function LayoutScreen({ navigation }) {
+export default function LayoutScreen({ navigation, route }) {
+  useEffect(() => {
+    console.log(route.params?.ProstorijaIds);
+  }, [route.params?.ProstorijaIds]);
+
   const [opitonSelected, setOpitonSelected] = useState(-1);
   return (
     <View style={styles.temp}>
@@ -54,20 +58,7 @@ export default function LayoutScreen({ navigation }) {
         errorMsg="This is an error message!"
       />
 
-      <InputSelect
-        isError={false}
-        errorMsg="This is an error message!"
-        title="Select input"
-        details="Ovo je oznaci input"
-        selectModalTitle="Select Modal Title"
-        options={[
-          { id: 1, title: "Broj 1" },
-          { id: 2, title: "Broj 2" },
-          { id: 3, title: "Broj 3" },
-        ]}
-        selectedOption={opitonSelected}
-        setSelectedOption={setOpitonSelected}
-      />
+
       <InputTextArea
         isError={false}
         errorMsg="This is an error message!"
@@ -76,7 +67,7 @@ export default function LayoutScreen({ navigation }) {
         placeholder="Upisi tekst"
         numberOfLines={4}
       /> */}
-      <Button
+      {/* <Button
         title="Add Event"
         onPress={() =>
           navigation.navigate("Event", {
@@ -84,6 +75,16 @@ export default function LayoutScreen({ navigation }) {
             type: "view", // add | view | update
           })
         }
+      /> */}
+      <InputSelect
+        isError={false}
+        errorMsg="This is an error message!"
+        title="Prostorija"
+        details="Ovo je oznaci input"
+        fetchUrl="http://192.168.8.102:3001/table/room?user_id=1&room_id=8"
+        prevPage="Home"
+        navigation={navigation}
+        multiple={true}
       />
     </View>
   );

@@ -4,17 +4,17 @@ import { inputStyles } from "./helpers/inputStyles";
 import { AntDesign } from "@expo/vector-icons";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 import { useState } from "react";
-import InputSelectModal from "./helpers/InputSelectModal";
+import InputSelectModal from "./helpers/InputSelectScreen";
 
 export default function InputSelect({
   title,
   details,
-  selectModalTitle,
-  options,
-  selectedOption,
-  setSelectedOption,
+  fetchUrl,
   isError,
   errorMsg,
+  navigation,
+  prevPage,
+  multiple,
 }) {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -25,7 +25,17 @@ export default function InputSelect({
       isError={isError}
       errorMsg={errorMsg}
     >
-      <TouchableOpacityRipple onPress={() => setModalOpen(true)}>
+      <TouchableOpacityRipple
+        // onPress={() => setModalOpen(true)}
+        onPress={() =>
+          navigation.navigate("Select", {
+            fetchUrl: fetchUrl,
+            header: title,
+            prevPage: prevPage,
+            multiple: multiple,
+          })
+        }
+      >
         <View
           style={[
             inputStyles.inputBox,
@@ -33,18 +43,16 @@ export default function InputSelect({
             isError && inputStyles.inputBox_error,
           ]}
         >
-          <InputSelectModal
+          {/* <InputSelectModal
             modalOpen={modalOpen}
             closeModal={() => setModalOpen(false)}
-            options={options}
-            selectedOption={selectedOption}
-            setSelectedOption={setSelectedOption}
-            selectModalTitle={selectModalTitle}
-          />
+            fetchUrl={fetchUrl}
+            selectModalTitle={title}
+          /> */}
           <Text style={inputStyles.inputValue}>
-            {selectedOption != -1
+            {/* {selectedOption != -1
               ? options.find((item) => item.id == selectedOption).title
-              : "Označi"}
+              : "Označi"} */}
           </Text>
           <AntDesign name="down" size={20} color="gray" />
         </View>
