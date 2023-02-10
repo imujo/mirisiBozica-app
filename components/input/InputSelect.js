@@ -1,11 +1,11 @@
 import Input from "./Input";
 import { Text, View, StyleSheet } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
-import { AntDesign } from "@expo/vector-icons";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 import { useEffect, useState } from "react";
-import InputSelectModal from "./helpers/InputSelectScreen";
+
 import useFetch from "../../hooks/useFetch";
+import { AntDesign } from "@expo/vector-icons";
 
 export default function InputSelect({
   title,
@@ -46,7 +46,6 @@ export default function InputSelect({
       errorMsg={errorMsg}
     >
       <TouchableOpacityRipple
-        // onPress={() => setModalOpen(true)}
         onPress={() =>
           navigation.navigate("Select", {
             fetchUrl: allDataUrl,
@@ -87,7 +86,7 @@ export default function InputSelect({
             )}
           </View>
 
-          <AntDesign name="down" size={20} color="gray" />
+          <AntDesign name="plus" size={20} color="gray" />
         </View>
       </TouchableOpacityRipple>
     </Input>
