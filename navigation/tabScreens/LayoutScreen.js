@@ -79,10 +79,10 @@ export default function LayoutScreen({ navigation, route }) {
         details="Ovo je oznaci input"
         allDataUrl="http://192.168.8.102:3001/table/room?user_id=1&room_id=8"
         selectDataUrl="http://192.168.8.102:3001/table/ids"
-        prevPage="Home"
         navigation={navigation}
         multiple={true}
-        selectedItemIds={route.params?.ProstorijaIds}
+        addable={true}
+        removable={true}
       />
     </View>
   );

@@ -18,6 +18,8 @@ export default function InputSelect({
   prevPage,
   multiple,
   selectedItemIds,
+  addable,
+  removable,
 }) {
   const { loading, error, value } = useFetch(
     {
@@ -52,6 +54,8 @@ export default function InputSelect({
             header: title,
             prevPage: prevPage,
             multiple: multiple,
+            addable: addable,
+            removable: removable,
           })
         }
       >
@@ -82,11 +86,14 @@ export default function InputSelect({
                 );
               })
             ) : (
-              <Text>Oznaci</Text>
+              <Text style={inputStyles.inputValue}>Oznaci</Text>
             )}
           </View>
 
-          <AntDesign name="plus" size={20} color="gray" />
+          <AntDesign
+            style={[inputStyles.inputValue, { fontSize: 20 }]}
+            name="plus"
+          />
         </View>
       </TouchableOpacityRipple>
     </Input>

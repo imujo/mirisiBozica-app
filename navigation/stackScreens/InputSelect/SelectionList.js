@@ -7,7 +7,15 @@ export default function SelectionList({
   allData,
   onPress,
   style,
+  isError,
+  isLoading,
 }) {
+  if (isError) {
+    return <Text>Error</Text>;
+  } else if (isLoading) {
+    return <Text>Loading</Text>;
+  }
+
   return (
     <View style={[localStyles.selectedItemsSection, style]}>
       {selectedIds.map((id, i) => {
