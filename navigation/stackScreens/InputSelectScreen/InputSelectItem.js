@@ -9,6 +9,7 @@ export default function InputSelectItem({
   postSelection,
   deletable,
   onDelete,
+  style,
 }) {
   const { id, title } = item;
 
@@ -26,7 +27,7 @@ export default function InputSelectItem({
 
   return (
     <TouchableOpacityRipple onPress={select}>
-      <View style={localStyles.item}>
+      <View style={[localStyles.item, style]}>
         <Text style={localStyles.text}>{title}</Text>
         {deletable && (
           <TouchableOpacity>
@@ -53,7 +54,7 @@ const localStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     minHeight: 40,
-    paddingHorizontal: 30,
+    width: "100%",
   },
   deleteIcon: {
     padding: 15,

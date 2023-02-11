@@ -20,6 +20,7 @@ export default StackNavigaitonWrapper = () => {
           headerShown: true,
           title: route.params.header,
           headerBackVisible: false,
+          headerTitleAlign: "center",
         })}
       />
     </Stack.Navigator>

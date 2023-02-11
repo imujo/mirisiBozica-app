@@ -6,6 +6,7 @@ export default function List({
   isError,
   isLoading,
   keyExtractor,
+  style,
 }) {
   if (isError) {
     return <Text>Error</Text>;
@@ -14,6 +15,7 @@ export default function List({
   } else if (data.length) {
     return (
       <FlatList
+        style={style}
         data={data}
         keyExtractor={keyExtractor ? keyExtractor : (item) => item.id}
         renderItem={renderItem}

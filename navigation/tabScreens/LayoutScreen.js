@@ -47,7 +47,12 @@ export default function LayoutScreen({ navigation, route }) {
         isError={false}
         errorMsg="This is an error message!"
       />
-
+      <InputPhone
+        title="Phone input"
+        details="Ovo je telefonski input"
+        isError={false}
+        errorMsg="This is an error message!"
+      />
 
 
 
@@ -71,20 +76,13 @@ export default function LayoutScreen({ navigation, route }) {
       <InputSelect
         isError={false}
         errorMsg="This is an error message!"
-        title="Prostorija"
-        details="Ovo je oznaci input"
-        allDataUrl="http://192.168.8.102:3001/table/room?user_id=1&room_id=8"
-        selectDataUrl="http://192.168.8.102:3001/table/ids"
+        title="Stol"
+        details="Oznaci stol ili stolove"
+        fetchUrl="/table/room?user_id=1&room_id=8"
         navigation={navigation}
-        multiple={true}
+        multiple={false}
         addable={true}
         deletable={true}
-      />
-      <InputPhone
-        title="Phone input"
-        details="Ovo je telefonski input"
-        isError={false}
-        errorMsg="This is an error message!"
       />
     </View>
   );

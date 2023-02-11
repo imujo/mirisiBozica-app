@@ -1,8 +1,14 @@
 import { StyleSheet, View, TextInput } from "react-native";
 
-export default function Search({ value, onChangeText, iconVisible, icon }) {
+export default function Search({
+  value,
+  onChangeText,
+  iconVisible,
+  icon,
+  style,
+}) {
   return (
-    <View style={localStyles.search}>
+    <View style={[localStyles.search, style]}>
       <TextInput
         style={localStyles.input}
         placeholder="Search"
@@ -26,7 +32,5 @@ const localStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "lightgray",
     padding: 8,
-    marginHorizontal: 20,
-    marginTop: 20,
   },
 });

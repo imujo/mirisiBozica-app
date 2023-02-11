@@ -3,9 +3,9 @@ import TouchableOpacityRipple from "../../../components/TouchableOpacityRipple";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function SelectionList({
-  selectedIds,
-  allData,
+  data,
   onPress,
+  removable = false,
   style,
   isError,
   isLoading,
@@ -18,14 +18,15 @@ export default function SelectionList({
 
   return (
     <View style={[localStyles.selectedItemsSection, style]}>
-      {selectedIds.map((id, i) => {
+      {data.map((item, i) => {
         return (
-          <TouchableOpacityRipple key={i} onPress={() => onPress(id)}>
+          <TouchableOpacityRipple
+            key={i}
+            onPress={() => removable && onPress(item)}
+          >
             <View style={localStyles.selectedItem}>
-              <Text style={localStyles.selectedItemText}>
-                {allData?.find((valueItem) => valueItem.id == id).title}
-              </Text>
-              <AntDesign name="close" size={12} color="black" />
+              <Text style={localStyles.selectedItemText}>{item.title}</Text>
+              {removable && <AntDesign name="close" size={12} color="black" />}
             </View>
           </TouchableOpacityRipple>
         );
@@ -39,7 +40,6 @@ const localStyles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
-    marginHorizontal: 30,
   },
   selectedItem: {
     display: "flex",

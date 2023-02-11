@@ -1,4 +1,4 @@
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
 import useDebounce from "../../../hooks/useDebounce";
 import useFetch from "../../../hooks/useFetch";
@@ -6,7 +6,7 @@ import SelectionList from "./SelectionList";
 import InputSelectItem from "./InputSelectItem";
 import Search from "../../../components/Search";
 import { AntDesign } from "@expo/vector-icons";
-import InputSelectList from "../../../components/List";
+import List from "../../../components/List";
 
 export default function InputSelectPage({ navigation, route }) {
   const { fetchUrl, multiple, addable, deletable } = route.params;
@@ -82,23 +82,25 @@ export default function InputSelectPage({ navigation, route }) {
 
   return (
     <View style={localStyles.page}>
-      <SelectionList
-        selectedIds={selectedItemIds}
-        allData={value}
-        onPress={(id) => removeSelectedId(id)}
-        isError={error}
-        isLoading={loading}
-      />
-      <Search
-        value={query}
-        onChangeText={setQuery}
-        iconVisible={addable && query}
-        icon={
-          <AntDesign name="plus" size={20} onPress={() => addItem(query)} />
-        }
-      />
+      <View style={localStyles.margin}>
+        <SelectionList
+          data={value?.filter((item) => selectedItemIds.includes(item.id))}
+          onPress={(item) => removeSelectedId(item.id)}
+          isError={error}
+          isLoading={loading}
+          removable={true}
+        />
+        <Search
+          value={query}
+          onChangeText={setQuery}
+          iconVisible={addable && query}
+          icon={
+            <AntDesign name="plus" size={20} onPress={() => addItem(query)} />
+          }
+        />
+      </View>
 
-      <InputSelectList
+      <List
         data={filteredItems}
         renderItem={(item) => (
           <InputSelectItem
@@ -108,6 +110,7 @@ export default function InputSelectPage({ navigation, route }) {
             postSelection={postSelection}
             deletable={deletable}
             onDelete={(item) => deleteItem(item.id)}
+            style={localStyles.listItem}
           />
         )}
         isError={error}
@@ -120,5 +123,11 @@ export default function InputSelectPage({ navigation, route }) {
 const localStyles = StyleSheet.create({
   page: {
     marginVertical: 20,
+  },
+  margin: {
+    marginHorizontal: 25,
+  },
+  listItem: {
+    paddingHorizontal: 25,
   },
 });
