@@ -1,11 +1,11 @@
 import { FlatList, Text } from "react-native";
-import InputSelectPageItem from "./InputSelectItem";
 
-export default function InputSelectList({
+export default function List({
   data,
   renderItem,
   isError,
   isLoading,
+  keyExtractor,
 }) {
   if (isError) {
     return <Text>Error</Text>;
@@ -15,7 +15,7 @@ export default function InputSelectList({
     return (
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={keyExtractor ? keyExtractor : (item) => item.id}
         renderItem={renderItem}
       />
     );

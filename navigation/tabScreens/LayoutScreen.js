@@ -16,6 +16,7 @@ import InputDate from "../../components/input/InputTime";
 
 export default function LayoutScreen({ navigation, route }) {
   const [opitonSelected, setOpitonSelected] = useState(-1);
+
   return (
     <View style={styles.temp}>
       {/* <InputText
@@ -47,12 +48,7 @@ export default function LayoutScreen({ navigation, route }) {
         errorMsg="This is an error message!"
       />
 
-      <InputPhone
-        title="Phone input"
-        details="Ovo je telefonski input"
-        isError={false}
-        errorMsg="This is an error message!"
-      />
+
 
 
       <InputTextArea
@@ -82,7 +78,13 @@ export default function LayoutScreen({ navigation, route }) {
         navigation={navigation}
         multiple={true}
         addable={true}
-        removable={true}
+        deletable={true}
+      />
+      <InputPhone
+        title="Phone input"
+        details="Ovo je telefonski input"
+        isError={false}
+        errorMsg="This is an error message!"
       />
     </View>
   );

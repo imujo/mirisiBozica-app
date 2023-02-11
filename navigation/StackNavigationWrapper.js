@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigationWrapper from "./TabNavigationWrapper";
-import InputSelectScreen from "./stackScreens/InputSelect/InputSelectScreen";
+import InputSelectScreen from "./stackScreens/InputSelectScreen/InputSelectScreen";
 
 const Stack = createNativeStackNavigator();
 

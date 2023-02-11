@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import countryCodes from "../../../other/countryCodes.json";
 import CustomModal from "../../CustomModal";
+import List from "../../List";
 import TouchableOpacityRipple from "../../TouchableOpacityRipple";
 export default function CountryCodeSelect({
   modalOpen,
@@ -10,7 +11,7 @@ export default function CountryCodeSelect({
 }) {
   return (
     <CustomModal isOpen={modalOpen} close={closeModal} title="Označi državu">
-      <FlatList
+      <List
         data={countryCodes}
         renderItem={({ item }) => (
           <CountryCodeItem
@@ -20,7 +21,7 @@ export default function CountryCodeSelect({
             closeModal={closeModal}
           />
         )}
-      ></FlatList>
+      ></List>
     </CustomModal>
   );
 }

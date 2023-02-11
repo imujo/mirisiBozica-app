@@ -19,7 +19,7 @@ export default function InputSelect({
   multiple,
   selectedItemIds,
   addable,
-  removable,
+  deletable,
 }) {
   const { loading, error, value } = useFetch(
     {
@@ -55,7 +55,7 @@ export default function InputSelect({
             prevPage: prevPage,
             multiple: multiple,
             addable: addable,
-            removable: removable,
+            deletable: deletable,
           })
         }
       >

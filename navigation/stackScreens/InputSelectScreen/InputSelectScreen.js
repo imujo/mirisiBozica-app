@@ -1,16 +1,15 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import { useEffect, useState } from "react";
 import useDebounce from "../../../hooks/useDebounce";
 import useFetch from "../../../hooks/useFetch";
 import SelectionList from "./SelectionList";
-import InputSelectPageItem from "./InputSelectItem";
+import InputSelectItem from "./InputSelectItem";
 import Search from "../../../components/Search";
 import { AntDesign } from "@expo/vector-icons";
-import InputSelectList from "./InputSelectList";
+import InputSelectList from "../../../components/List";
 
 export default function InputSelectPage({ navigation, route }) {
-  const { fetchUrl, multiple, addable, removable } = route.params;
+  const { fetchUrl, multiple, addable, deletable } = route.params;
 
   // Select
   const [selectedItemIds, setSelectedItemIds] = useState([]);
@@ -39,6 +38,24 @@ export default function InputSelectPage({ navigation, route }) {
     // TODO post item -> add id to selected
     setRunFetch((prev) => prev + 1);
     return;
+  };
+
+  const deleteItem = (id) => {
+    Alert.alert(
+      "Izbrisi",
+      "Jesi li siguran da zelis izbrisati?",
+      [
+        {
+          text: "Odustani",
+          style: "cancel",
+        },
+        {
+          text: "Izbrisi",
+          onPress: () => Alert.alert("Deleted"), // TODO delete item
+        },
+      ]
+      // { cancelable: true }
+    );
   };
 
   // Search
@@ -84,11 +101,13 @@ export default function InputSelectPage({ navigation, route }) {
       <InputSelectList
         data={filteredItems}
         renderItem={(item) => (
-          <InputSelectPageItem
+          <InputSelectItem
             {...item}
             setSelectedItemIds={setSelectedItemIds}
             multiple={multiple}
             postSelection={postSelection}
+            deletable={deletable}
+            onDelete={(item) => deleteItem(item.id)}
           />
         )}
         isError={error}
