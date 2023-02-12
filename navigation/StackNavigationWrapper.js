@@ -2,6 +2,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigationWrapper from "./TabNavigationWrapper";
 import InputSelectScreen from "./stackScreens/InputSelectScreen/InputSelectScreen";
 
+import AddRestaurantScreen from "./stackScreens/AddRestaurantScreen/AddRestaurantScreen";
+import AddAktivnostiScreen from "./stackScreens/AddAktivnostiScreen/AddAktivnostiScreen";
+import AddApartmentScreen from "./stackScreens/AddApartmentScreen/AddApartmentScreen";
+import AddOstaloScreen from "./stackScreens/AddOstaloScreen/AddOstaloScreen";
+
 const Stack = createNativeStackNavigator();
 
 export default StackNavigaitonWrapper = () => {
@@ -23,6 +28,21 @@ export default StackNavigaitonWrapper = () => {
           headerTitleAlign: "center",
         })}
       />
+      <Stack.Group>
+        <Stack.Screen
+          name="AddRestaurantScreen"
+          component={AddRestaurantScreen}
+        />
+        <Stack.Screen name="AddOstaloScreen" component={AddOstaloScreen} />
+        <Stack.Screen
+          name="AddAktivnostiScreen"
+          component={AddAktivnostiScreen}
+        />
+        <Stack.Screen
+          name="AddApartmentScreen"
+          component={AddApartmentScreen}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };
