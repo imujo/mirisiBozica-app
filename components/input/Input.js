@@ -22,7 +22,7 @@ export default function Input(props) {
       <ConditionalWrapper
         condition={onPress}
         wrapper={(children) => (
-          <TouchableOpacityRipple disabled={disabled} onPress={onPress}>
+          <TouchableOpacityRipple onPress={onPress}>
             {children}
           </TouchableOpacityRipple>
         )}
