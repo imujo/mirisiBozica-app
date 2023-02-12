@@ -1,11 +1,7 @@
 import Input from "./Input";
-import { Text, View, StyleSheet } from "react-native";
+import { Text } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
-import TouchableOpacityRipple from "../TouchableOpacityRipple";
-import { useEffect, useState } from "react";
 import SelectionList from "../../navigation/stackScreens/InputSelectScreen/SelectionList";
-
-import useFetch from "../../hooks/useFetch";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function InputSelect({

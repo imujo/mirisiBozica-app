@@ -19,14 +19,14 @@ import TouchableOpacityRipple from "../../components/TouchableOpacityRipple";
 export default function LayoutScreen({ navigation, route }) {
   return (
     <View style={styles.temp}>
-      {/* <InputText
+      <InputText
         isError={false}
         errorMsg="This is an error message!"
         title="Text input"
         details="Ovo je tekstualni input"
         placeholder="Upisi tekst"
         capitalize="words"
-      /> */}
+      />
       {/* <InputNumber
         isError={false}
         errorMsg="This is an error message!"
