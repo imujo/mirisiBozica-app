@@ -7,7 +7,6 @@ export default function InputText({
   details,
   placeholder,
   capitalize,
-
   isError,
   errorMsg,
 }) {
@@ -19,11 +18,7 @@ export default function InputText({
       errorMsg={errorMsg}
     >
       <TextInput
-        style={[
-          inputStyles.inputBox,
-          inputStyles.inputValue,
-          isError && inputStyles.inputBox_error,
-        ]}
+        style={inputStyles.inputValue}
         placeholder={placeholder}
         autoCapitalize={capitalize}
       />

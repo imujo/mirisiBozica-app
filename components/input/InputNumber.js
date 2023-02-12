@@ -17,11 +17,7 @@ export default function InputNumber({
       errorMsg={errorMsg}
     >
       <TextInput
-        style={[
-          inputStyles.inputBox,
-          inputStyles.inputValue,
-          isError && inputStyles.inputBox_error,
-        ]}
+        style={inputStyles.inputValue}
         placeholder={placeholder}
         keyboardType="numeric"
       />

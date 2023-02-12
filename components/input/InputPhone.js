@@ -16,41 +16,26 @@ export default function InputPhone({ title, details, isError, errorMsg }) {
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() => setCountryCodeModalOpen(true)}
+      elementLeft={
+        <View style={{ marginRight: 5 }}>
+          <CountryCodeSelect
+            modalOpen={countryCodeModalOpen}
+            closeModal={() => setCountryCodeModalOpen(false)}
+            countryCodeSelected={countryCodeSelected}
+            setCountryCodeSelected={setCountryCodeSelected}
+          />
+          <Text style={[{ fontSize: inputStyles.inputValue.fontSize }]}>
+            +{countryCodeSelected} |
+          </Text>
+        </View>
+      }
     >
-      <View
-        style={[
-          inputStyles.inputBox,
-          localStyles.input,
-          isError && inputStyles.inputBox_error,
-        ]}
-      >
-        <TouchableOpacityRipple onPress={() => setCountryCodeModalOpen(true)}>
-          <View>
-            <CountryCodeSelect
-              modalOpen={countryCodeModalOpen}
-              closeModal={() => setCountryCodeModalOpen(false)}
-              countryCodeSelected={countryCodeSelected}
-              setCountryCodeSelected={setCountryCodeSelected}
-            />
-            <Text style={[{ fontSize: inputStyles.inputValue.fontSize }]}>
-              +{countryCodeSelected} |{" "}
-            </Text>
-          </View>
-        </TouchableOpacityRipple>
-        <TextInput
-          placeholder="917835462"
-          keyboardType="numeric"
-          style={inputStyles.inputValue}
-        />
-      </View>
+      <TextInput
+        placeholder="917835462"
+        keyboardType="numeric"
+        style={inputStyles.inputValue}
+      />
     </Input>
   );
 }
-
-const localStyles = StyleSheet.create({
-  input: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});

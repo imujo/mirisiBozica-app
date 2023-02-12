@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Input from "./Input";
 import { inputStyles } from "./helpers/inputStyles";
+import TouchableOpacityRipple from "../TouchableOpacityRipple";
 
 export default function InputDate({ title, details, isError, errorMsg }) {
   const [date, setDate] = useState(new Date());
@@ -21,24 +22,19 @@ export default function InputDate({ title, details, isError, errorMsg }) {
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() => setShow(true)}
     >
-      <TouchableOpacity onPress={() => setShow(true)}>
-        <View
-          style={[inputStyles.inputBox, isError && inputStyles.inputBox_error]}
-        >
-          <Text style={inputStyles.inputValue}>{shortTime}</Text>
-        </View>
+      <Text style={inputStyles.inputValue}>{shortTime}</Text>
 
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={"time"}
-            is24Hour={true}
-            onChange={onChange}
-          />
-        )}
-      </TouchableOpacity>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"time"}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
     </Input>
   );
 }

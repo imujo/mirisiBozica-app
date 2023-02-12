@@ -34,5 +34,6 @@ export const inputStyles = StyleSheet.create({
   inputValue: {
     fontSize: 16,
     color: "#4f4f4f",
+    flex: 1,
   },
 });

@@ -20,24 +20,19 @@ export default function InputDate({ title, details, isError, errorMsg }) {
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() => setShow(true)}
     >
-      <TouchableOpacity onPress={() => setShow(true)}>
-        <View
-          style={[inputStyles.inputBox, isError && inputStyles.inputBox_error]}
-        >
-          <Text style={inputStyles.inputValue}>{dateToString(date)}</Text>
-        </View>
+      <Text style={inputStyles.inputValue}>{dateToString(date)}</Text>
 
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={"date"}
-            is24Hour={true}
-            onChange={onChange}
-          />
-        )}
-      </TouchableOpacity>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"date"}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
     </Input>
   );
 }

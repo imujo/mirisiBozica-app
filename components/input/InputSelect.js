@@ -38,39 +38,21 @@ export default function InputSelect({
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() =>
+        navigation.navigate("Select", {
+          fetchUrl: fetchUrl,
+          header: title,
+          multiple: multiple,
+          addable: addable,
+          deletable: deletable,
+        })
+      }
+      elementBellow={
+        <SelectionList data={value} isError={error} isLoading={loading} />
+      }
+      elementRight={<AntDesign style={{ fontSize: 20 }} name="plus" />}
     >
-      <TouchableOpacityRipple
-        onPress={() =>
-          navigation.navigate("Select", {
-            fetchUrl: fetchUrl,
-            header: title,
-            multiple: multiple,
-            addable: addable,
-            deletable: deletable,
-          })
-        }
-      >
-        <View
-          style={[
-            inputStyles.inputBox,
-            localStyles.inputBox,
-            isError && inputStyles.inputBox_error,
-          ]}
-        >
-          <Text style={inputStyles.inputValue}>Oznaci</Text>
-          <AntDesign
-            style={[inputStyles.inputValue, { fontSize: 20 }]}
-            name="plus"
-          />
-        </View>
-      </TouchableOpacityRipple>
-      <SelectionList data={value} isError={error} isLoading={loading} />
+      <Text style={inputStyles.inputValue}>Oznaci</Text>
     </Input>
   );
 }
-
-const localStyles = StyleSheet.create({
-  inputBox: {
-    justifyContent: "space-between",
-  },
-});

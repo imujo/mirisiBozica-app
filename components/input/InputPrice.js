@@ -1,12 +1,12 @@
 import Input from "./Input";
-import { StyleSheet, TextInput } from "react-native";
+import { TextInput, View, Text } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
 
-export default function InputTextArea({
+export default function InputText({
   title,
   details,
   placeholder,
-  numberOfLines,
+
   isError,
   errorMsg,
 }) {
@@ -17,16 +17,12 @@ export default function InputTextArea({
       isError={isError}
       errorMsg={errorMsg}
     >
+      <Text style={{ marginRight: 10 }}>€‎</Text>
       <TextInput
-        style={[inputStyles.inputValue, localStyles.input]}
+        style={[inputStyles.inputValue, { flex: 1 }]}
         placeholder={placeholder}
-        multiline={true}
-        numberOfLines={numberOfLines}
+        keyboardType="numeric"
       />
     </Input>
   );
 }
-
-const localStyles = StyleSheet.create({
-  input: { textAlignVertical: "top" },
-});
