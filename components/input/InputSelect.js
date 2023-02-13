@@ -14,6 +14,7 @@ export default function InputSelect({
   deletable,
   isError,
   errorMsg,
+  style,
 }) {
   // TODO fetch selected
   const error = false;
@@ -47,6 +48,7 @@ export default function InputSelect({
         <SelectionList data={value} isError={error} isLoading={loading} />
       }
       elementRight={<AntDesign style={{ fontSize: 20 }} name="plus" />}
+      style={style}
     >
       <Text style={inputStyles.inputValue}>Oznaci</Text>
     </Input>

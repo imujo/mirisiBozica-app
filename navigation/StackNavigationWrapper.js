@@ -11,24 +11,27 @@ const Stack = createNativeStackNavigator();
 
 export default StackNavigaitonWrapper = () => {
   return (
-    <Stack.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Stack.Screen name="Home" component={TabNavigationWrapper} />
+    <Stack.Navigator initialRouteName="Home">
+      <Stack.Screen
+        name="Home"
+        component={TabNavigationWrapper}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="Select"
         component={InputSelectScreen}
         options={({ route }) => ({
-          headerShown: true,
           title: route.params.header,
           headerBackVisible: false,
           headerTitleAlign: "center",
         })}
       />
-      <Stack.Group>
+      <Stack.Group
+        screenOptions={{
+          headerBackVisible: false,
+          headerTitleAlign: "center",
+        }}
+      >
         <Stack.Screen
           name="AddRestaurantScreen"
           component={AddRestaurantScreen}

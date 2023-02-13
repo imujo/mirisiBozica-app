@@ -8,6 +8,7 @@ export default function InputNumber({
   placeholder,
   isError,
   errorMsg,
+  style,
 }) {
   return (
     <Input
@@ -15,6 +16,7 @@ export default function InputNumber({
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      style={style}
     >
       <TextInput
         style={inputStyles.inputValue}

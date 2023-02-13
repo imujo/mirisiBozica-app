@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Button } from "react-native";
+import InputTextArea from "../../components/input/InputTextArea";
 
 export default function AddScreen({ navigation, route }) {
   return (

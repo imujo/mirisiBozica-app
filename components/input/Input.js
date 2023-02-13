@@ -4,19 +4,20 @@ import TouchableOpacityRipple from "../TouchableOpacityRipple";
 import { inputStyles } from "./helpers/inputStyles";
 import ConditionalWrapper from "../../other/ConditionalWrapper";
 
-export default function Input(props) {
-  const {
-    title,
-    details,
-    isError,
-    errorMsg,
-    elementLeft,
-    elementRight,
-    elementBellow,
-    onPress,
-  } = props;
+export default function Input({
+  title,
+  details,
+  isError,
+  errorMsg,
+  elementLeft,
+  elementRight,
+  elementBellow,
+  onPress,
+  style,
+  children,
+}) {
   return (
-    <View style={inputStyles.inputWrapper}>
+    <View style={[inputStyles.inputWrapper, style]}>
       <Text style={[inputStyles.title]}>{title}</Text>
 
       <ConditionalWrapper
@@ -31,7 +32,7 @@ export default function Input(props) {
           style={[inputStyles.inputBox, isError && inputStyles.inputBox_error]}
         >
           {elementLeft}
-          {props.children}
+          {children}
           {elementRight}
         </View>
       </ConditionalWrapper>

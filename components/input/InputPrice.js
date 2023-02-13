@@ -6,9 +6,9 @@ export default function InputText({
   title,
   details,
   placeholder,
-
   isError,
   errorMsg,
+  style,
 }) {
   return (
     <Input
@@ -16,6 +16,7 @@ export default function InputText({
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      style={style}
     >
       <Text style={{ marginRight: 10 }}>€‎</Text>
       <TextInput

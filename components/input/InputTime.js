@@ -5,7 +5,13 @@ import Input from "./Input";
 import { inputStyles } from "./helpers/inputStyles";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 
-export default function InputDate({ title, details, isError, errorMsg }) {
+export default function InputDate({
+  title,
+  details,
+  isError,
+  errorMsg,
+  style,
+}) {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
@@ -23,6 +29,7 @@ export default function InputDate({ title, details, isError, errorMsg }) {
       isError={isError}
       errorMsg={errorMsg}
       onPress={() => setShow(true)}
+      style={style}
     >
       <Text style={inputStyles.inputValue}>{shortTime}</Text>
 

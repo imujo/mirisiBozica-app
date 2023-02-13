@@ -9,6 +9,7 @@ export default function InputText({
   capitalize,
   isError,
   errorMsg,
+  style,
 }) {
   return (
     <Input
@@ -16,6 +17,7 @@ export default function InputText({
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      style={style}
     >
       <TextInput
         style={inputStyles.inputValue}

@@ -5,7 +5,13 @@ import { useState } from "react";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 import CountryCodeSelect from "./helpers/CountryCodeSelect";
 
-export default function InputPhone({ title, details, isError, errorMsg }) {
+export default function InputPhone({
+  title,
+  details,
+  isError,
+  errorMsg,
+  style,
+}) {
   const [value, setValue] = useState("");
   const [countryCodeModalOpen, setCountryCodeModalOpen] = useState(false);
   const [countryCodeSelected, setCountryCodeSelected] = useState("385");
@@ -30,6 +36,7 @@ export default function InputPhone({ title, details, isError, errorMsg }) {
           </Text>
         </View>
       }
+      style={style}
     >
       <TextInput
         placeholder="917835462"

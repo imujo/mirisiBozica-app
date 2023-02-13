@@ -23,7 +23,7 @@ export const inputStyles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 7,
     backgroundColor: "white",
-    minWidth: 200,
+    minWidth: 100,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
