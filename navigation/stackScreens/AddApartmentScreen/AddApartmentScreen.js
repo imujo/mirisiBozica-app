@@ -1,14 +1,18 @@
-import { View, Button } from "react-native";
+import { View, Button, Text, Switch } from "react-native";
 import InputTextArea from "../../../components/input/InputTextArea";
 import InputText from "../../../components/input/InputText";
 import InputNumber from "../../../components/input/InputNumber";
 import InputDate from "../../../components/input/InputDate";
 import InputSelect from "../../../components/input/InputSelect";
 import InputPrice from "../../../components/input/InputPrice";
+import InputSwitch from "../../../components/input/InputSwitch";
 import addEventStyles from "../addEventStyles";
 import Rows from "../../../components/Rows";
+import { useState } from "react";
 
 export default function AddApartmentScreen() {
+  const [bedAndBreakfast, setBedAndBreakfast] = useState(false);
+
   return (
     <View style={addEventStyles.page}>
       <Rows.RowsContainer gap={50}>
@@ -40,6 +44,12 @@ export default function AddApartmentScreen() {
             </Rows.Row>
           </Rows.RowsContainer>
           <InputDate title="Odlazak" style={addEventStyles.inputGap} />
+
+          <InputSwitch
+            title={"Bed & Breakfast"}
+            value={bedAndBreakfast}
+            setValue={setBedAndBreakfast}
+          />
         </Rows.Row>
       </Rows.RowsContainer>
       <InputTextArea

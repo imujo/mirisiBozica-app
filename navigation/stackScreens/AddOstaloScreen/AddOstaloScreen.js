@@ -4,10 +4,13 @@ import InputText from "../../../components/input/InputText";
 import InputDate from "../../../components/input/InputDate";
 import InputSelect from "../../../components/input/InputSelect";
 import InputTime from "../../../components/input/InputTime";
+import InputSwitch from "../../../components/input/InputSwitch";
 import addEventStyles from "../addEventStyles";
 import Rows from "../../../components/Rows";
+import { useState } from "react";
 
 export default function AddOstaloScreen() {
+  const [cijeliDan, setCijeliDan] = useState(false);
   return (
     <View style={addEventStyles.page}>
       <Rows.RowsContainer gap={50}>
@@ -24,15 +27,23 @@ export default function AddOstaloScreen() {
         <Rows.Row>
           <InputDate title="Datum" style={addEventStyles.inputGap} />
 
-          <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
-            <Rows.Row>
-              <InputTime title="Vrijeme pocetka" />
-            </Rows.Row>
-            {}
-            <Rows.Row>
-              <InputTime title="Vrijeme kraja" />
-            </Rows.Row>
-          </Rows.RowsContainer>
+          <InputSwitch
+            title="Cijeli dan"
+            value={cijeliDan}
+            setValue={setCijeliDan}
+          />
+
+          {!cijeliDan && (
+            <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
+              <Rows.Row>
+                <InputTime title="Vrijeme pocetka" />
+              </Rows.Row>
+              {}
+              <Rows.Row>
+                <InputTime title="Vrijeme kraja" />
+              </Rows.Row>
+            </Rows.RowsContainer>
+          )}
         </Rows.Row>
       </Rows.RowsContainer>
       <InputTextArea
