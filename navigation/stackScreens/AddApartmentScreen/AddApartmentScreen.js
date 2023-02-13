@@ -1,5 +1,4 @@
 import { View, Button } from "react-native";
-
 import InputTextArea from "../../../components/input/InputTextArea";
 import InputText from "../../../components/input/InputText";
 import InputNumber from "../../../components/input/InputNumber";
