@@ -11,6 +11,7 @@ import { useState } from "react";
 
 export default function AddOstaloScreen() {
   const [cijeliDan, setCijeliDan] = useState(false);
+
   return (
     <View style={addEventStyles.page}>
       <Rows.RowsContainer gap={50}>
