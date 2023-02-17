@@ -9,6 +9,8 @@ export default function InputNumber({
   isError,
   errorMsg,
   style,
+  value,
+  setValue,
 }) {
   return (
     <Input
@@ -22,6 +24,8 @@ export default function InputNumber({
         style={inputStyles.inputValue}
         placeholder={placeholder}
         keyboardType="numeric"
+        value={value}
+        onChangeText={setValue}
       />
     </Input>
   );

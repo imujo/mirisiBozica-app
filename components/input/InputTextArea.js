@@ -10,6 +10,8 @@ export default function InputTextArea({
   isError,
   errorMsg,
   style,
+  value,
+  setValue,
 }) {
   return (
     <Input
@@ -24,6 +26,8 @@ export default function InputTextArea({
         placeholder={placeholder}
         multiline={true}
         numberOfLines={numberOfLines}
+        value={value}
+        onChangeText={setValue}
       />
     </Input>
   );

@@ -11,13 +11,14 @@ export default function InputDate({
   isError,
   errorMsg,
   style,
+  value,
+  setValue,
 }) {
-  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     setShow(false);
-    setDate(selectedDate);
+    setValue(selectedDate);
   };
 
   return (
@@ -29,12 +30,12 @@ export default function InputDate({
       onPress={() => setShow(true)}
       style={style}
     >
-      <Text style={inputStyles.inputValue}>{dateToString(date)}</Text>
+      <Text style={inputStyles.inputValue}>{dateToString(value)}</Text>
 
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={value}
           mode={"date"}
           is24Hour={true}
           onChange={onChange}

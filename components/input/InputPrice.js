@@ -9,6 +9,8 @@ export default function InputText({
   isError,
   errorMsg,
   style,
+  value,
+  setValue,
 }) {
   return (
     <Input
@@ -23,6 +25,8 @@ export default function InputText({
         style={[inputStyles.inputValue, { flex: 1 }]}
         placeholder={placeholder}
         keyboardType="numeric"
+        value={value}
+        onChangeText={setValue}
       />
     </Input>
   );

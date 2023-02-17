@@ -11,6 +11,8 @@ export default function InputPhone({
   isError,
   errorMsg,
   style,
+  value,
+  setValue,
 }) {
   const [value, setValue] = useState("");
   const [countryCodeModalOpen, setCountryCodeModalOpen] = useState(false);
@@ -42,6 +44,8 @@ export default function InputPhone({
         placeholder="917835462"
         keyboardType="numeric"
         style={inputStyles.inputValue}
+        value={value}
+        onChangeText={setValue}
       />
     </Input>
   );

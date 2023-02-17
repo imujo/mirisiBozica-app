@@ -37,7 +37,7 @@ export default function Input({
         </View>
       </ConditionalWrapper>
 
-      {details && (
+      {(details || isError) && (
         <Text style={[inputStyles.details, isError && inputStyles.text_error]}>
           {isError ? errorMsg : details}
         </Text>

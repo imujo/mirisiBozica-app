@@ -5,22 +5,23 @@ import Input from "./Input";
 import { inputStyles } from "./helpers/inputStyles";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 
-export default function InputDate({
+export default function InputTime({
   title,
   details,
   isError,
   errorMsg,
   style,
+  value,
+  setValue,
 }) {
-  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     setShow(false);
-    setDate(selectedDate);
+    setValue(selectedDate);
   };
 
-  const shortTime = date.toTimeString().slice(0, 5);
+  const shortTime = value.toTimeString().slice(0, 5);
 
   return (
     <Input
@@ -36,7 +37,7 @@ export default function InputDate({
       {show && (
         <DateTimePicker
           testID="dateTimePicker"
-          value={date}
+          value={value}
           mode={"time"}
           is24Hour={true}
           onChange={onChange}

@@ -10,6 +10,7 @@ export default function InputText({
   isError,
   errorMsg,
   style,
+  value, setValue
 }) {
   return (
     <Input
@@ -23,6 +24,8 @@ export default function InputText({
         style={inputStyles.inputValue}
         placeholder={placeholder}
         autoCapitalize={capitalize}
+        value={value}
+        onChangeText={setValue}
       />
     </Input>
   );
