@@ -13,7 +13,7 @@ export default function InputSwitch({ title, value, setValue, style }) {
       ]}
     >
       <Text>{title}</Text>
-      <Switch value={value} onValueChange={() => setValue((prev) => !prev)} />
+      <Switch value={value} onValueChange={setValue} />
     </View>
   );
 }
