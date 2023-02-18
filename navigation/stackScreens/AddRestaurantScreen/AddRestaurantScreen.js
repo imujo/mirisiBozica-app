@@ -11,6 +11,7 @@ import Rows from "../../../components/Rows";
 import { useState } from "react";
 
 import axios from "axios";
+import useFetch from "../../../hooks/useFetch";
 
 export default function AddRestaurantScreen({ navigation }) {
   const [guest, setGuest] = useState("");
@@ -24,7 +25,18 @@ export default function AddRestaurantScreen({ navigation }) {
 
   const [error, setError] = useState({});
 
+  const fetchOptions = {
+    method: "POST",
+    url: "/api/event/restaurant",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const { loading, err, value } = useFetch(fetchOptions, []);
+
   const submit = async () => {
+    console.log(value.id);
     setError({});
     const data = {
       guest: guest,
@@ -39,7 +51,7 @@ export default function AddRestaurantScreen({ navigation }) {
 
     try {
       const response = await axios.put(
-        "http://10.0.2.2:3001/api/event/restaurant/41",
+        `http://10.0.2.2:3001/api/event/restaurant/${value.id}`,
         data
       );
 
@@ -50,8 +62,17 @@ export default function AddRestaurantScreen({ navigation }) {
     }
   };
 
-  if (error.type == "UnknownError") {
+  if (err) {
+    console.log(err);
+    return <Text>Err</Text>;
+  }
+
+  if (error?.type == "UnknownError") {
     return <Text>Something went wrong...</Text>;
+  }
+
+  if (loading) {
+    return <Text>Loading...</Text>;
   }
 
   return (

@@ -1,9 +1,5 @@
 import useAsync from "./useAsync";
-import axios from "axios";
-
-const serverFetch = axios.create({
-  baseURL: "http://192.168.8.102:3001",
-});
+import baseAxios from "../other/baseAxios";
 
 const DEFAULT_OPTIONS = {
   method: "GET",
@@ -12,10 +8,11 @@ const DEFAULT_OPTIONS = {
 
 export default function useFetch(options = {}, dependencies = []) {
   return useAsync(() => {
-    return serverFetch
+    return baseAxios
       .request(options ? options : DEFAULT_OPTIONS)
       .then((res) => {
-        if (res.data?.data) return res.data.data;
+        console.log(res.data.data);
+        if (res.data.data) return res.data.data;
         return Promise.reject("ERROR");
       })
       .catch((err) => {
