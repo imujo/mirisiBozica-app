@@ -8,10 +8,8 @@ import InputPrice from "../../../components/input/InputPrice";
 import InputTime from "../../../components/input/InputTime";
 import addEventStyles from "../addEventStyles";
 import Rows from "../../../components/Rows";
-import { useState } from "react";
-
-import axios from "axios";
-import useFetch from "../../../hooks/useFetch";
+import { useEffect, useState } from "react";
+import baseAxios from "../../../other/baseAxios";
 
 export default function AddRestaurantScreen({ navigation }) {
   const [guest, setGuest] = useState("");
@@ -24,6 +22,9 @@ export default function AddRestaurantScreen({ navigation }) {
   const [details, setDetails] = useState("");
 
   const [error, setError] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const [eventId, setEventId] = useState("");
 
   const fetchOptions = {
     method: "POST",
@@ -33,12 +34,19 @@ export default function AddRestaurantScreen({ navigation }) {
     },
   };
 
-  const { loading, err, value } = useFetch(fetchOptions, []);
+  useEffect(() => {
+    setLoading(true);
+
+    baseAxios
+      .request(fetchOptions)
+      .then((res) => setEventId(res.data.data.id))
+      .catch((err) => setError(err.response.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   const submit = async () => {
-    console.log(value.id);
     setError({});
-    const data = {
+    const body = {
       guest: guest,
       n_adults: n_adults,
       n_children: n_children,
@@ -50,10 +58,11 @@ export default function AddRestaurantScreen({ navigation }) {
     };
 
     try {
-      const response = await axios.put(
-        `http://10.0.2.2:3001/api/event/restaurant/${value.id}`,
-        data
-      );
+      await baseAxios.request({
+        method: "PUT",
+        url: `/api/event/restaurant/${eventId}`,
+        data: body,
+      });
 
       navigation.goBack();
     } catch (error) {
@@ -62,12 +71,7 @@ export default function AddRestaurantScreen({ navigation }) {
     }
   };
 
-  if (err) {
-    console.log(err);
-    return <Text>Err</Text>;
-  }
-
-  if (error?.type == "UnknownError") {
+  if (error && "type" in error && error?.type != "ValidationError") {
     return <Text>Something went wrong...</Text>;
   }
 

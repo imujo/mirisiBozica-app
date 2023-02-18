@@ -8,18 +8,17 @@ export const dateToString = (date) => {
   return `${day}.${month}.${year}`;
 };
 
-export const fetchFn = (options) => {
-  const [loading, setLoading] = useState();
-  const [data, setData] = useState();
-  const [error, setError] = useState();
+export const fetchFn = async (options) => {
+  let data, error;
 
-  setLoading(true);
-
-  baseAxios
-    .request(options)
-    .then((res) => setData(res.data.data))
-    .catch(setError)
-    .finally(() => setLoading(false));
-
-  return { data, loading, error };
+  try {
+    const response = await baseAxios.request(options);
+    data = response.data.data;
+    error = null;
+    return { data, error };
+  } catch (err) {
+    data = null;
+    error = err.response.data;
+    return { data, error };
+  }
 };
