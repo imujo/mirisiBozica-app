@@ -57,6 +57,7 @@ export default function AddRestaurantScreen({ navigation }) {
       details: details,
     };
 
+    setLoading(true);
     try {
       await baseAxios.request({
         method: "PUT",
@@ -68,6 +69,8 @@ export default function AddRestaurantScreen({ navigation }) {
     } catch (error) {
       console.log(error);
       setError(error.response.data);
+    } finally {
+      setLoading(false);
     }
   };
 
