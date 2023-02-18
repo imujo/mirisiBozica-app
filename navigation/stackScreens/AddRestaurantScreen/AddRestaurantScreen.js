@@ -12,14 +12,16 @@ import { useEffect, useState } from "react";
 import baseAxios from "../../../other/baseAxios";
 
 export default function AddRestaurantScreen({ navigation }) {
-  const [guest, setGuest] = useState("");
-  const [n_adults, setN_adults] = useState(0);
-  const [n_children, setN_children] = useState(0);
-  const [start_time, setStart_time] = useState(new Date());
-  const [end_time, setEnd_time] = useState(new Date());
-  const [date, setDate] = useState(new Date());
-  const [price, setPrice] = useState(0);
-  const [details, setDetails] = useState("");
+  const [formData, setFormData] = useState({
+    guest: "",
+    n_adults: 0,
+    n_children: 0,
+    start_time: new Date(),
+    end_time: new Date(),
+    date: new Date(),
+    price: 0,
+    details: "",
+  });
 
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
@@ -47,14 +49,14 @@ export default function AddRestaurantScreen({ navigation }) {
   const submit = async () => {
     setError({});
     const body = {
-      guest: guest,
-      n_adults: n_adults,
-      n_children: n_children,
-      start_time: start_time,
-      end_time: end_time,
-      date: date,
-      price: price,
-      details: details,
+      guest: formData.guest,
+      n_adults: formData.n_adults,
+      n_children: formData.n_children,
+      start_time: formData.start_time,
+      end_time: formData.end_time,
+      date: formData.date,
+      price: formData.price,
+      details: formData.details,
     };
 
     setLoading(true);
@@ -90,16 +92,24 @@ export default function AddRestaurantScreen({ navigation }) {
             title="Gost"
             placeholder="Unesi gosta"
             style={addEventStyles.inputGap}
-            value={guest}
-            setValue={setGuest}
+            value={formData.guest}
+            setValue={(value) =>
+              setFormData((prev) => {
+                return { ...prev, guest: value };
+              })
+            }
             isError={error.data?.guest}
             errorMsg={error.data?.guest}
           />
           <InputDate
             title="Datum"
             style={addEventStyles.inputGap}
-            value={date}
-            setValue={setDate}
+            value={formData.date}
+            setValue={(value) =>
+              setFormData((prev) => {
+                return { ...prev, date: value };
+              })
+            }
             isError={error.data?.date}
             errorMsg={error.data?.date}
           />
@@ -108,8 +118,12 @@ export default function AddRestaurantScreen({ navigation }) {
             title="Cijena"
             placeholder="Unesi cijenu"
             style={addEventStyles.inputGap}
-            value={price}
-            setValue={setPrice}
+            value={formData.price}
+            setValue={(value) =>
+              setFormData((prev) => {
+                return { ...prev, price: value };
+              })
+            }
             isError={error.data?.price}
             errorMsg={error.data?.price}
           />
@@ -121,8 +135,12 @@ export default function AddRestaurantScreen({ navigation }) {
               <InputNumber
                 title="Broj odraslih"
                 placeholder="Unesi broj odraslih"
-                value={n_adults}
-                setValue={setN_adults}
+                value={formData.n_adults}
+                setValue={(value) =>
+                  setFormData((prev) => {
+                    return { ...prev, n_adults: value };
+                  })
+                }
                 isError={error.data?.n_adults}
                 errorMsg={error.data?.n_adults}
               />
@@ -132,8 +150,12 @@ export default function AddRestaurantScreen({ navigation }) {
               <InputNumber
                 title="Broj djece"
                 placeholder="Unesi broj djece"
-                value={n_children}
-                setValue={setN_children}
+                value={formData.n_children}
+                setValue={(value) =>
+                  setFormData((prev) => {
+                    return { ...prev, n_children: value };
+                  })
+                }
                 isError={error.data?.n_children}
                 errorMsg={error.data?.n_children}
               />
@@ -145,8 +167,12 @@ export default function AddRestaurantScreen({ navigation }) {
               <InputTime
                 title="Vrijeme dolaska"
                 placeholder="Unesi vrijeme dolaska"
-                value={start_time}
-                setValue={setStart_time}
+                value={formData.start_time}
+                setValue={(value) =>
+                  setFormData((prev) => {
+                    return { ...prev, start_time: value };
+                  })
+                }
                 isError={error.data?.start_time}
                 errorMsg={error.data?.start_time}
                 details="Upisi vrijeme dolaska osobe"
@@ -157,8 +183,12 @@ export default function AddRestaurantScreen({ navigation }) {
               <InputTime
                 title="Vrijeme odlaska"
                 placeholder="Unesi vrijeme odlaska"
-                value={end_time}
-                setValue={setEnd_time}
+                value={formData.end_time}
+                setValue={(value) =>
+                  setFormData((prev) => {
+                    return { ...prev, end_time: value };
+                  })
+                }
                 isError={error.data?.end_time}
                 errorMsg={error.data?.end_time}
               />
@@ -173,8 +203,12 @@ export default function AddRestaurantScreen({ navigation }) {
         placeholder="Unesi detalje"
         numberOfLines={7}
         style={addEventStyles.inputGap}
-        value={details}
-        setValue={setDetails}
+        value={formData.details}
+        setValue={(value) =>
+          setFormData((prev) => {
+            return { ...prev, details: value };
+          })
+        }
         isError={error.data?.details}
         errorMsg={error.data?.details}
       />

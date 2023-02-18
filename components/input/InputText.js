@@ -10,7 +10,8 @@ export default function InputText({
   isError,
   errorMsg,
   style,
-  value, setValue
+  value,
+  setValue,
 }) {
   return (
     <Input
