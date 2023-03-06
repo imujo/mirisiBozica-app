@@ -16,9 +16,13 @@ export default function SelectionList({
     return <Text>Loading</Text>;
   }
 
+  if (!Array.isArray(data)) {
+    data = [];
+  }
+
   return (
     <View style={[localStyles.selectedItemsSection, style]}>
-      {data.map((item, i) => {
+      {data?.map((item, i) => {
         return (
           <TouchableOpacityRipple
             key={i}

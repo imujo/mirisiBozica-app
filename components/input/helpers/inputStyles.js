@@ -36,4 +36,7 @@ export const inputStyles = StyleSheet.create({
     color: "#4f4f4f",
     flex: 1,
   },
+  disabled: {
+    backgroundColor: "lightgray",
+  },
 });

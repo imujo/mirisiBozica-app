@@ -6,7 +6,7 @@ export default function InputSelectItem({
   item,
   setSelectedItemIds,
   multiple,
-  postSelection,
+  postOne,
   deletable,
   onDelete,
   style,
@@ -21,7 +21,7 @@ export default function InputSelectItem({
         return addedId;
       });
     } else {
-      postSelection([id]);
+      postOne(id);
     }
   };
 

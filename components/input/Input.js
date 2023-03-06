@@ -9,6 +9,7 @@ export default function Input({
   details,
   isError,
   errorMsg,
+  disabled,
   elementLeft,
   elementRight,
   elementBellow,
@@ -23,13 +24,17 @@ export default function Input({
       <ConditionalWrapper
         condition={onPress}
         wrapper={(children) => (
-          <TouchableOpacityRipple onPress={onPress}>
+          <TouchableOpacityRipple onPress={onPress} disabled={disabled}>
             {children}
           </TouchableOpacityRipple>
         )}
       >
         <View
-          style={[inputStyles.inputBox, isError && inputStyles.inputBox_error]}
+          style={[
+            inputStyles.inputBox,
+            isError && inputStyles.inputBox_error,
+            disabled && inputStyles.disabled,
+          ]}
         >
           {elementLeft}
           {children}

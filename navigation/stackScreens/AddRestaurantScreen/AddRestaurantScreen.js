@@ -8,10 +8,11 @@ import InputPrice from "../../../components/input/InputPrice";
 import InputTime from "../../../components/input/InputTime";
 import addEventStyles from "../addEventStyles";
 import Rows from "../../../components/Rows";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import baseAxios from "../../../other/baseAxios";
+import { useFocusEffect } from "@react-navigation/native";
 
-export default function AddRestaurantScreen({ navigation }) {
+export default function AddRestaurantScreen({ route, navigation }) {
   const [formData, setFormData] = useState({
     guest: "",
     n_adults: 0,
@@ -26,25 +27,47 @@ export default function AddRestaurantScreen({ navigation }) {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const [eventId, setEventId] = useState("");
+  const [roomLoading, setRoomLoading] = useState(false);
+  const [roomError, setRoomError] = useState(false);
+  const [room, setRoom] = useState({});
 
-  const fetchOptions = {
-    method: "POST",
-    url: "/api/event/restaurant",
+  const [tablesLoading, setTablesLoading] = useState(false);
+  const [tablesError, setTablesError] = useState(false);
+  const [tables, setTables] = useState([]);
+
+  const eventId = route.params.event_id;
+
+  const getRoomFetchOptions = {
+    method: "GET",
+    url: `/api/event/restaurant/room/${eventId}`,
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  useEffect(() => {
-    setLoading(true);
+  const getTablesFetchOptions = {
+    method: "GET",
+    url: `/api/event/restaurant/tables/${eventId}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-    baseAxios
-      .request(fetchOptions)
-      .then((res) => setEventId(res.data.data.id))
-      .catch((err) => setError(err.response.data))
-      .finally(() => setLoading(false));
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      setRoomLoading(true);
+      baseAxios(getRoomFetchOptions)
+        .then((res) => setRoom(res.data.data))
+        .catch((err) => setRoomError(true))
+        .finally(() => setRoomLoading(false));
+
+      setTablesLoading(true);
+      baseAxios(getTablesFetchOptions)
+        .then((res) => setTables(res.data.data))
+        .catch((err) => setTablesError(true))
+        .finally(() => setTablesLoading(false));
+    }, [])
+  );
 
   const submit = async () => {
     setError({});
@@ -113,7 +136,19 @@ export default function AddRestaurantScreen({ navigation }) {
             isError={error.data?.date}
             errorMsg={error.data?.date}
           />
-          <InputSelect title="Prostorija" style={addEventStyles.inputGap} />
+          <InputSelect
+            title="Prostorija"
+            style={addEventStyles.inputGap}
+            navigation={navigation}
+            fetchUrls={{
+              getSelected: `/api/event/restaurant/room/${eventId}`,
+              putSelected: `/api/event/restaurant/room/${eventId}`,
+              getOptions: `/api/room/all`,
+            }}
+            selectedError={roomError}
+            selectedLoading={roomLoading}
+            selectedData={room}
+          />
           <InputPrice
             title="Cijena"
             placeholder="Unesi cijenu"
@@ -195,7 +230,21 @@ export default function AddRestaurantScreen({ navigation }) {
             </Rows.Row>
           </Rows.RowsContainer>
 
-          <InputSelect title="Stol/ovi" style={addEventStyles.inputGap} />
+          <InputSelect
+            navigation={navigation}
+            style={addEventStyles.inputGap}
+            title="Stol/ovi"
+            fetchUrls={{
+              getSelected: `/api/event/restaurant/tables/${eventId}`,
+              putSelected: `/api/event/restaurant/tables/${eventId}`,
+              getOptions: `/api/table/all_room/${room[0]?.id}`,
+            }}
+            selectedError={tablesError}
+            selectedLoading={tablesLoading}
+            selectedData={tables}
+            disabled={!room.length}
+            multiple={true}
+          />
         </Rows.Row>
       </Rows.RowsContainer>
       <InputTextArea

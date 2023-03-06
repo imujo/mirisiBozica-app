@@ -1,15 +1,20 @@
 import { Alert, Button, StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
 import useDebounce from "../../../hooks/useDebounce";
-import useFetch from "../../../hooks/useFetch";
 import SelectionList from "./SelectionList";
 import InputSelectItem from "./InputSelectItem";
 import Search from "../../../components/Search";
 import { AntDesign } from "@expo/vector-icons";
 import List from "../../../components/List";
+import baseAxios from "../../../other/baseAxios";
 
 export default function InputSelectPage({ navigation, route }) {
-  const { fetchUrl, multiple, addable, deletable } = route.params;
+  const { fetchUrls, multiple, addable, deletable } = route.params;
+
+  const [error, setError] = useState();
+  const [loading, setLoading] = useState();
+
+  const [options, setOptions] = useState([]);
 
   // Select
   const [selectedItemIds, setSelectedItemIds] = useState([]);
@@ -20,23 +25,85 @@ export default function InputSelectPage({ navigation, route }) {
   };
 
   // Data
-  const [runFetch, setRunFetch] = useState(0);
-  const fetchOptions = {
+  const getOptionsFetchOptions = {
     method: "GET",
-    url: fetchUrl,
-    props: { table_ids: selectedItemIds },
+    url: fetchUrls.getOptions,
     headers: {
       "Content-Type": "application/json",
     },
   };
-  const { loading, error, value } = useFetch(fetchOptions, [runFetch]);
-  const postSelection = (ids) => {
-    // TODO post  .then
-    navigation.goBack();
+  const getSelectedFetchOptions = {
+    method: "GET",
+    url: fetchUrls.getSelected,
+    headers: {
+      "Content-Type": "application/json",
+    },
   };
+  const putSelectedFetchOptions = {
+    method: "PUT",
+    url: fetchUrls.putSelected,
+    data: {
+      selected_ids: selectedItemIds,
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const getOptions = () => {
+    setLoading(true);
+    baseAxios(getOptionsFetchOptions)
+      .then((res) => setOptions(res.data.data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  const getSelected = () => {
+    setLoading(true);
+    baseAxios(getSelectedFetchOptions)
+      .then((res) => {
+        const items = res.data.data;
+        const ids = items.map((item) => item.id);
+        setSelectedItemIds(ids);
+      })
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    getOptions();
+    getSelected();
+  }, []);
+
+  const postMultiple = () => {
+    setLoading(true);
+    baseAxios(putSelectedFetchOptions)
+      .then(() => navigation.goBack())
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
+  const postOne = (id) => {
+    setLoading(true);
+    baseAxios({
+      method: "PUT",
+      url: fetchUrls.putSelected,
+      data: {
+        id: id,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then(() => navigation.goBack())
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  };
+
   const addItem = (title) => {
     // TODO post item -> add id to selected
-    setRunFetch((prev) => prev + 1);
+    getOptions();
+    getSelected();
     return;
   };
 
@@ -61,7 +128,7 @@ export default function InputSelectPage({ navigation, route }) {
   // Search
   const [query, setQuery] = useState("");
   const debouncedQuery = useDebounce(query, 200);
-  const filteredItems = value?.filter(
+  const filteredItems = options?.filter(
     (item) =>
       // search query
       item.title.toLowerCase().includes(debouncedQuery.toLowerCase()) &&
@@ -74,7 +141,11 @@ export default function InputSelectPage({ navigation, route }) {
     if (multiple) {
       navigation.setOptions({
         headerRight: () => (
-          <Button onPress={() => postSelection(selectedItemIds)} title="Done" />
+          <Button
+            onPress={() => postMultiple(selectedItemIds)}
+            disabled={!selectedItemIds.length}
+            title="Done"
+          />
         ),
       });
     }
@@ -84,7 +155,7 @@ export default function InputSelectPage({ navigation, route }) {
     <View style={localStyles.page}>
       <View style={localStyles.margin}>
         <SelectionList
-          data={value?.filter((item) => selectedItemIds.includes(item.id))}
+          data={options?.filter((item) => selectedItemIds.includes(item.id))}
           onPress={(item) => removeSelectedId(item.id)}
           isError={error}
           isLoading={loading}
@@ -107,7 +178,7 @@ export default function InputSelectPage({ navigation, route }) {
             {...item}
             setSelectedItemIds={setSelectedItemIds}
             multiple={multiple}
-            postSelection={postSelection}
+            postOne={postOne}
             deletable={deletable}
             onDelete={(item) => deleteItem(item.id)}
             style={localStyles.listItem}

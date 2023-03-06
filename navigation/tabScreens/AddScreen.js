@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import InputTextArea from "../../components/input/InputTextArea";
+import baseAxios from "../../other/baseAxios";
 
 export default function AddScreen({ navigation, route }) {
+  const createEventAndNavigate = (url, screen) => {
+    baseAxios
+      .request({
+        method: "POST",
+        url: url,
+      })
+      .then((event_id) =>
+        navigation.navigate(screen, { event_id: event_id.data.data.event_id })
+      )
+      .catch((err) => console.log(err));
+  };
+
   return (
     <View style={styles.temp}>
       <Button
         title="Restoran"
-        onPress={() => navigation.navigate("AddRestaurantScreen")}
+        onPress={() =>
+          createEventAndNavigate("api/event/restaurant", "AddRestaurantScreen")
+        }
       />
       <Button
         title="Apartment"

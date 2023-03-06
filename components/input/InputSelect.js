@@ -3,41 +3,31 @@ import { Text } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
 import SelectionList from "../../navigation/stackScreens/InputSelectScreen/SelectionList";
 import { AntDesign } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
+import baseAxios from "../../other/baseAxios";
 
 export default function InputSelect({
   title,
   details,
-  fetchUrl,
+  fetchUrls,
   navigation,
   multiple,
   addable,
+  disabled,
   deletable,
-  isError,
-  errorMsg,
   style,
+  selectedData,
+  selectedError,
+  selectedLoading,
 }) {
-  // TODO fetch selected
-  const error = false;
-  const loading = false;
-  const value = [
-    {
-      id: 1,
-      title: "Pod voltom",
-    },
-    {
-      id: 2,
-      title: "rodoslovlje",
-    },
-  ];
   return (
     <Input
       title={title}
       details={details}
-      isError={isError}
-      errorMsg={errorMsg}
+      disabled={disabled}
       onPress={() =>
         navigation.navigate("Select", {
-          fetchUrl: fetchUrl,
+          fetchUrls: fetchUrls,
           header: title,
           multiple: multiple,
           addable: addable,
@@ -45,7 +35,11 @@ export default function InputSelect({
         })
       }
       elementBellow={
-        <SelectionList data={value} isError={error} isLoading={loading} />
+        <SelectionList
+          data={selectedData}
+          isError={selectedError}
+          isLoading={selectedLoading}
+        />
       }
       elementRight={<AntDesign style={{ fontSize: 20 }} name="plus" />}
       style={style}
