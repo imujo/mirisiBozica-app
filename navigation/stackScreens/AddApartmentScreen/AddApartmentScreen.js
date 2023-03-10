@@ -8,9 +8,12 @@ import InputPrice from "../../../components/input/InputPrice";
 import InputSwitch from "../../../components/input/InputSwitch";
 import addEventStyles from "../addEventStyles";
 import Rows from "../../../components/Rows";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 
-export default function AddApartmentScreen({ navigation }) {
+export default function AddApartmentScreen({ route, navigation }) {
+  const eventId = route.params.event_id;
+
   const [formData, setFormData] = useState({
     guest: "",
     n_adults: 0,
@@ -25,25 +28,27 @@ export default function AddApartmentScreen({ navigation }) {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const [eventId, setEventId] = useState("");
+  const [apartmentsLoading, setApartmentsLoading] = useState(false);
+  const [apartmentsError, setApartmentsError] = useState(false);
+  const [apartments, setApartments] = useState([]);
 
-  const fetchOptions = {
-    method: "POST",
-    url: "/api/event/apartment",
+  const getApartmentsFetchOptions = {
+    method: "GET",
+    url: `/api/event/apartment/apartments/${eventId}`,
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  useEffect(() => {
-    setLoading(true);
-
-    baseAxios
-      .request(fetchOptions)
-      .then((res) => setEventId(res.data.data.id))
-      .catch((err) => setError(err.response.data))
-      .finally(() => setLoading(false));
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      setApartmentsLoading(true);
+      baseAxios(getApartmentsFetchOptions)
+        .then((res) => setApartments(res.data.data))
+        .catch((err) => setApartmentsError(true))
+        .finally(() => setApartmentsLoading(false));
+    }, [])
+  );
 
   const submit = async () => {
     setError({});
@@ -112,7 +117,20 @@ export default function AddApartmentScreen({ navigation }) {
             isError={error.data?.date_in}
             errorMsg={error.data?.date_in}
           />
-          <InputSelect title="Apartman/i" style={addEventStyles.inputGap} />
+          <InputSelect
+            title="Apartman/i"
+            style={addEventStyles.inputGap}
+            navigation={navigation}
+            fetchUrls={{
+              getSelected: `/api/event/apartment/apartments/${eventId}`,
+              putSelected: `/api/event/apartment/apartments/${eventId}`,
+              getOptions: `/api/apartment/all`,
+            }}
+            multiple={true}
+            selectedError={apartmentsError}
+            selectedLoading={apartmentsLoading}
+            selectedData={apartments}
+          />
           <InputPrice
             title="Cijena"
             placeholder="Unesi cijenu"

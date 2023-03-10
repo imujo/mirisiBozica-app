@@ -3,8 +3,6 @@ import { Text } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
 import SelectionList from "../../navigation/stackScreens/InputSelectScreen/SelectionList";
 import { AntDesign } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
-import baseAxios from "../../other/baseAxios";
 
 export default function InputSelect({
   title,

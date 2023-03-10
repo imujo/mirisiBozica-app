@@ -26,7 +26,9 @@ export default function AddScreen({ navigation, route }) {
       />
       <Button
         title="Apartment"
-        onPress={() => navigation.navigate("AddApartmentScreen")}
+        onPress={() =>
+          createEventAndNavigate("/api/event/apartment", "AddApartmentScreen")
+        }
       />
       <Button
         title="Aktivnosti"
