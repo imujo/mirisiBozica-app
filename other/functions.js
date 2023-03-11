@@ -35,3 +35,127 @@ export const fetchFn = async (options) => {
     return { data, error };
   }
 };
+
+// calculates position of events to enable overlapping events
+// https://gist.github.com/aholachek/ce7cd491546a88cbc9c4
+export function makeLayout(events, hourHeight) {
+  if (!events) return [];
+  events.forEach(function (d) {
+    if (!d.dateObj) {
+      d.dateObj = {
+        start: timeToNumber(d.start_time),
+        end: timeToNumber(d.end_time),
+      };
+    }
+    if (!d.layout) {
+      d.layout = {};
+    }
+  });
+
+  //this needs to be sorted by time
+  events.sort(function (a, b) {
+    if (a.dateObj.start < b.dateObj.start) return -1;
+    else if (b.dateObj.start < a.dateObj.start) return 1;
+  });
+
+  //add top and height vals
+  events.forEach(function (d) {
+    d.layout.top = d.dateObj.start * hourHeight;
+    d.layout.height = hourHeight * (d.dateObj.end - d.dateObj.start);
+  });
+
+  events.forEach(function (d) {
+    d.layout.earlyOverlap = events.filter(function (c) {
+      if (c == d) return false;
+      if (
+        c.dateObj.start < d.dateObj.start &&
+        c.dateObj.end > d.dateObj.start
+      ) {
+        return true;
+      } else if (d.dateObj.start == c.dateObj.start) {
+        if (c.dateObj.end > d.dateObj.end) return true;
+        else if (c.dateObj.end === d.dateObj.end && c.id < d.id) return true;
+      }
+    });
+
+    d.layout.lateOverlap = events.filter(function (c) {
+      if (c == d) return false;
+      if (
+        c.dateObj.start > d.dateObj.start &&
+        c.dateObj.start < d.dateObj.end
+      ) {
+        return true;
+      } else if (d.dateObj.start == c.dateObj.start) {
+        if (c.dateObj.end < d.dateObj.end) return true;
+        else if (c.dateObj.end === d.dateObj.end && c.id > d.id) return true;
+      }
+    });
+  });
+
+  //what is the longest consecutive set of items that are to each item's right?
+  //this will help determine the width
+  events.forEach(function (d) {
+    var mostEntries = 0;
+
+    function getLater(d, num) {
+      //we've reached the end of a branch
+      if (!d.layout.lateOverlap.length) {
+        if (num > mostEntries) mostEntries = num;
+      } else {
+        num += 1;
+        d.layout.lateOverlap.forEach(function (d) {
+          return getLater(d, num);
+        });
+      }
+    }
+    getLater(d, 0);
+
+    d.layout.maxRight = mostEntries;
+  });
+
+  //finally, calculate the widths
+  events.forEach(function (d) {
+    function getWidthAndPosition(d) {
+      var beforeWidth, immediatelyBefore;
+
+      if (!d.layout.earlyOverlap.length) {
+        beforeWidth = 0;
+      } else {
+        //because the sort might not be perfect
+        immediatelyBefore = (function () {
+          var farthestRight;
+          d.layout.earlyOverlap.forEach(function (item) {
+            if (
+              !farthestRight ||
+              item.layout.left > farthestRight.layout.left
+            ) {
+              farthestRight = item;
+            }
+          });
+          return farthestRight;
+        })();
+
+        beforeWidth =
+          immediatelyBefore.layout.left + immediatelyBefore.layout.width + 1;
+      }
+
+      //divide the remaining width equally between this block
+      //and the later overlapping ones
+      d.layout.width = (100 - beforeWidth) / (1 + d.layout.maxRight);
+      d.layout.left = beforeWidth;
+
+      d.layout.lateOverlap.forEach(function (l) {
+        if (l.layout.earlyOverlap[l.layout.earlyOverlap.length - 1] == d) {
+          getWidthAndPosition(l);
+        }
+      });
+    } //end getWidth
+
+    //it's a top level
+    if (!d.layout.earlyOverlap.length) {
+      getWidthAndPosition(d);
+    }
+  });
+
+  return events;
+}

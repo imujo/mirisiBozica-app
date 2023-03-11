@@ -2,11 +2,13 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Rows from "../Rows";
 import Columns from "../Columns";
-import { timeToNumber } from "../../other/functions";
+import { timeToNumber, makeLayout } from "../../other/functions";
 import CalendarBackground from "./CalendarBackground";
 
 export default function CalendarList({ events, error, loading }) {
   const hourHeight = 60;
+  const layoutEvents = makeLayout(events, hourHeight);
+
   if (loading) {
     return <Text>Loading...</Text>;
   } else if (error) {
@@ -19,17 +21,16 @@ export default function CalendarList({ events, error, loading }) {
 
   return (
     <>
-      {events.map((event, i) => {
-        const startTimeNum = timeToNumber(event.start_time);
-        const endTimeNum = timeToNumber(event.end_time);
-
+      {layoutEvents.map((event, i) => {
         return (
           <View
             style={[
               styles.item,
               {
-                top: hourHeight * startTimeNum,
-                height: hourHeight * (endTimeNum - startTimeNum),
+                top: event.layout.top,
+                height: event.layout.height,
+                left: `${event.layout.left}%`,
+                width: `${event.layout.width}%`,
               },
             ]}
           >
@@ -47,7 +48,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 6,
-    marginRight: 20,
     position: "absolute",
     width: "100%",
   },
