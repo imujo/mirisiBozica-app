@@ -5,13 +5,20 @@ import Input from "./Input";
 import { inputStyles } from "./helpers/inputStyles";
 import { dateToString } from "../../other/functions";
 
-export default function InputDate({ title, details, isError, errorMsg }) {
-  const [date, setDate] = useState(new Date());
+export default function InputDate({
+  title,
+  details,
+  isError,
+  errorMsg,
+  style,
+  value,
+  setValue,
+}) {
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     setShow(false);
-    setDate(selectedDate);
+    setValue(selectedDate);
   };
 
   return (
@@ -20,24 +27,20 @@ export default function InputDate({ title, details, isError, errorMsg }) {
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() => setShow(true)}
+      style={style}
     >
-      <TouchableOpacity onPress={() => setShow(true)}>
-        <View
-          style={[inputStyles.inputBox, isError && inputStyles.inputBox_error]}
-        >
-          <Text style={inputStyles.inputValue}>{dateToString(date)}</Text>
-        </View>
+      <Text style={inputStyles.inputValue}>{dateToString(value)}</Text>
 
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={"date"}
-            is24Hour={true}
-            onChange={onChange}
-          />
-        )}
-      </TouchableOpacity>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={value}
+          mode={"date"}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
     </Input>
   );
 }

@@ -3,15 +3,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // Screens
 import SettingsScreen from "./tabScreens/SettingsScreen";
-import LayoutScreen from "./tabScreens/LayoutScreen";
+import AddScreen from "./tabScreens/AddScreen";
 import CalendarScreen from "./tabScreens/CalendarScreen";
 import { Text } from "react-native";
 
 // Screen names
 const screenNames = {
-  settings: "Settings",
-  layout: "Layout",
   calendar: "Calendar",
+  add: "Add",
+  settings: "Settings",
 };
 
 const Tab = createBottomTabNavigator();
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigationWrapper() {
   return (
     <Tab.Navigator
-      initialRouteName={screenNames.layout}
+      initialRouteName={screenNames.calendar}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, size, color }) => {
           return <Text>{route.name[0]}</Text>;
@@ -27,13 +27,13 @@ export default function TabNavigationWrapper() {
       })}
     >
       <Tab.Screen
-        name={screenNames.layout}
-        component={LayoutScreen}
+        name={screenNames.calendar}
+        component={CalendarScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen
-        name={screenNames.calendar}
-        component={CalendarScreen}
+        name={screenNames.add}
+        component={AddScreen}
         options={{ headerShown: false }}
       />
       <Tab.Screen

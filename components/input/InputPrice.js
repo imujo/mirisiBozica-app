@@ -1,8 +1,8 @@
 import Input from "./Input";
-import { TextInput, Text } from "react-native";
+import { TextInput, View, Text } from "react-native";
 import { inputStyles } from "./helpers/inputStyles";
 
-export default function InputNumber({
+export default function InputText({
   title,
   details,
   placeholder,
@@ -20,8 +20,9 @@ export default function InputNumber({
       errorMsg={errorMsg}
       style={style}
     >
+      <Text style={{ marginRight: 10 }}>€‎</Text>
       <TextInput
-        style={inputStyles.inputValue}
+        style={[inputStyles.inputValue, { flex: 1 }]}
         placeholder={placeholder}
         keyboardType="numeric"
         value={value}

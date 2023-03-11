@@ -5,7 +5,15 @@ import { useState } from "react";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
 import CountryCodeSelect from "./helpers/CountryCodeSelect";
 
-export default function InputPhone({ title, details, isError, errorMsg }) {
+export default function InputPhone({
+  title,
+  details,
+  isError,
+  errorMsg,
+  style,
+  value,
+  setValue,
+}) {
   const [value, setValue] = useState("");
   const [countryCodeModalOpen, setCountryCodeModalOpen] = useState(false);
   const [countryCodeSelected, setCountryCodeSelected] = useState("385");
@@ -16,41 +24,29 @@ export default function InputPhone({ title, details, isError, errorMsg }) {
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() => setCountryCodeModalOpen(true)}
+      elementLeft={
+        <View style={{ marginRight: 5 }}>
+          <CountryCodeSelect
+            modalOpen={countryCodeModalOpen}
+            closeModal={() => setCountryCodeModalOpen(false)}
+            countryCodeSelected={countryCodeSelected}
+            setCountryCodeSelected={setCountryCodeSelected}
+          />
+          <Text style={[{ fontSize: inputStyles.inputValue.fontSize }]}>
+            +{countryCodeSelected} |
+          </Text>
+        </View>
+      }
+      style={style}
     >
-      <View
-        style={[
-          inputStyles.inputBox,
-          localStyles.input,
-          isError && inputStyles.inputBox_error,
-        ]}
-      >
-        <TouchableOpacityRipple onPress={() => setCountryCodeModalOpen(true)}>
-          <View>
-            <CountryCodeSelect
-              modalOpen={countryCodeModalOpen}
-              closeModal={() => setCountryCodeModalOpen(false)}
-              countryCodeSelected={countryCodeSelected}
-              setCountryCodeSelected={setCountryCodeSelected}
-            />
-            <Text style={[{ fontSize: inputStyles.inputValue.fontSize }]}>
-              +{countryCodeSelected} |{" "}
-            </Text>
-          </View>
-        </TouchableOpacityRipple>
-        <TextInput
-          placeholder="917835462"
-          keyboardType="numeric"
-          style={inputStyles.inputValue}
-        />
-      </View>
+      <TextInput
+        placeholder="917835462"
+        keyboardType="numeric"
+        style={inputStyles.inputValue}
+        value={value}
+        onChangeText={setValue}
+      />
     </Input>
   );
 }
-
-const localStyles = StyleSheet.create({
-  input: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-});

@@ -3,17 +3,25 @@ import { Text, TouchableOpacity, View } from "react-native";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import Input from "./Input";
 import { inputStyles } from "./helpers/inputStyles";
+import TouchableOpacityRipple from "../TouchableOpacityRipple";
 
-export default function InputDate({ title, details, isError, errorMsg }) {
-  const [date, setDate] = useState(new Date());
+export default function InputTime({
+  title,
+  details,
+  isError,
+  errorMsg,
+  style,
+  value,
+  setValue,
+}) {
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
     setShow(false);
-    setDate(selectedDate);
+    setValue(selectedDate);
   };
 
-  const shortTime = date.toTimeString().slice(0, 5);
+  const shortTime = value.toTimeString().slice(0, 5);
 
   return (
     <Input
@@ -21,24 +29,20 @@ export default function InputDate({ title, details, isError, errorMsg }) {
       details={details}
       isError={isError}
       errorMsg={errorMsg}
+      onPress={() => setShow(true)}
+      style={style}
     >
-      <TouchableOpacity onPress={() => setShow(true)}>
-        <View
-          style={[inputStyles.inputBox, isError && inputStyles.inputBox_error]}
-        >
-          <Text style={inputStyles.inputValue}>{shortTime}</Text>
-        </View>
+      <Text style={inputStyles.inputValue}>{shortTime}</Text>
 
-        {show && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode={"time"}
-            is24Hour={true}
-            onChange={onChange}
-          />
-        )}
-      </TouchableOpacity>
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={value}
+          mode={"time"}
+          is24Hour={true}
+          onChange={onChange}
+        />
+      )}
     </Input>
   );
 }
