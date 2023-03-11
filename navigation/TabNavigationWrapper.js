@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export default function TabNavigationWrapper() {
   return (
     <Tab.Navigator
-      initialRouteName={screenNames.calendar}
+      initialRouteName={screenNames.settings}
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, size, color }) => {
           return <Text>{route.name[0]}</Text>;

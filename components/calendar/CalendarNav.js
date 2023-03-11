@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
+import { dateToString, dateAddDays } from "../../other/functions";
 
 export default function CalendarNav({ date, setDate }) {
   return (
@@ -9,15 +10,15 @@ export default function CalendarNav({ date, setDate }) {
         name="left"
         size={18}
         color="black"
-        onPress={() => setDate((date) => date.addDays(-1))}
+        onPress={() => setDate((date) => dateAddDays(date, -1))}
       />
-      <Text style={styles.dayText}>{date.toCroatiaDateString()}</Text>
+      <Text style={styles.dayText}>{dateToString(date)}</Text>
       <AntDesign
         style={styles.icon}
         name="right"
         size={18}
         color="black"
-        onPress={() => setDate((date) => date.addDays(1))}
+        onPress={() => setDate((date) => dateAddDays(date, 1))}
       />
     </View>
   );

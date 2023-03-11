@@ -7,7 +7,7 @@ import InputSelect from "../../components/input/InputSelect";
 import InputPrice from "../../components/input/InputPrice";
 import InputTime from "../../components/input/InputTime";
 import addEventStyles from "./addEventStyles";
-import Rows from "../../components/Rows";
+import Columns from "../../components/Columns";
 import { useCallback, useState } from "react";
 import baseAxios from "../../other/baseAxios";
 import { useFocusEffect } from "@react-navigation/native";
@@ -103,8 +103,8 @@ export default function AddRestaurantScreen({ route, navigation }) {
 
   return (
     <View style={addEventStyles.page}>
-      <Rows.RowsContainer gap={50}>
-        <Rows.Row>
+      <Columns.ColumnsContainer gap={50}>
+        <Columns.Column>
           <InputText
             title="Gost"
             placeholder="Unesi gosta"
@@ -156,11 +156,11 @@ export default function AddRestaurantScreen({ route, navigation }) {
             isError={error.data?.price}
             errorMsg={error.data?.price}
           />
-        </Rows.Row>
+        </Columns.Column>
 
-        <Rows.Row>
-          <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
-            <Rows.Row>
+        <Columns.Column>
+          <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
+            <Columns.Column>
               <InputNumber
                 title="Broj odraslih"
                 placeholder="Unesi broj odraslih"
@@ -173,9 +173,9 @@ export default function AddRestaurantScreen({ route, navigation }) {
                 isError={error.data?.n_adults}
                 errorMsg={error.data?.n_adults}
               />
-            </Rows.Row>
+            </Columns.Column>
 
-            <Rows.Row>
+            <Columns.Column>
               <InputNumber
                 title="Broj djece"
                 placeholder="Unesi broj djece"
@@ -188,11 +188,11 @@ export default function AddRestaurantScreen({ route, navigation }) {
                 isError={error.data?.n_children}
                 errorMsg={error.data?.n_children}
               />
-            </Rows.Row>
-          </Rows.RowsContainer>
+            </Columns.Column>
+          </Columns.ColumnsContainer>
 
-          <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
-            <Rows.Row>
+          <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
+            <Columns.Column>
               <InputTime
                 title="Vrijeme dolaska"
                 placeholder="Unesi vrijeme dolaska"
@@ -206,9 +206,9 @@ export default function AddRestaurantScreen({ route, navigation }) {
                 errorMsg={error.data?.start_time}
                 details="Upisi vrijeme dolaska osobe"
               />
-            </Rows.Row>
+            </Columns.Column>
 
-            <Rows.Row>
+            <Columns.Column>
               <InputTime
                 title="Vrijeme odlaska"
                 placeholder="Unesi vrijeme odlaska"
@@ -221,8 +221,8 @@ export default function AddRestaurantScreen({ route, navigation }) {
                 isError={error.data?.end_time}
                 errorMsg={error.data?.end_time}
               />
-            </Rows.Row>
-          </Rows.RowsContainer>
+            </Columns.Column>
+          </Columns.ColumnsContainer>
 
           {/* <InputSelect
             navigation={navigation}
@@ -239,8 +239,8 @@ export default function AddRestaurantScreen({ route, navigation }) {
             disabled={!room.length}
             multiple={true}
           /> */}
-        </Rows.Row>
-      </Rows.RowsContainer>
+        </Columns.Column>
+      </Columns.ColumnsContainer>
       <InputTextArea
         title="Detalji"
         placeholder="Unesi detalje"

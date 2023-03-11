@@ -6,6 +6,7 @@ import useDebounce from "../../hooks/useDebounce";
 import baseAxios from "../../other/baseAxios";
 import CalendarList from "../../components/calendar/CalendarList";
 import AllDayList from "../../components/calendar/AllDayList";
+import CalendarBackground from "../../components/calendar/CalendarBackground";
 
 export default function CalendarScreen() {
   const [date, setDate] = useState(new Date());
@@ -58,18 +59,20 @@ export default function CalendarScreen() {
   }, [debouncedDate]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <CalendarNav date={date} setDate={setDate} />
       <AllDayList
         events={apartmentEvents}
         loading={loadingApartmentEvents}
         error={errorApartmentEvents}
       />
-      <CalendarList
-        events={restaurantEvents}
-        loading={loadingRestaurantEvents}
-        error={errorRestaurantEvents}
-      />
+      <CalendarBackground hourHeight={60}>
+        <CalendarList
+          events={restaurantEvents}
+          loading={loadingRestaurantEvents}
+          error={errorRestaurantEvents}
+        />
+      </CalendarBackground>
     </SafeAreaView>
   );
 }

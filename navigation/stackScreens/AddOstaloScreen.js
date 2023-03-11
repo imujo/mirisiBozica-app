@@ -6,7 +6,7 @@ import InputSelect from "../../components/input/InputSelect";
 import InputTime from "../../components/input/InputTime";
 import InputSwitch from "../../components/input/InputSwitch";
 import addEventStyles from "./addEventStyles";
-import Rows from "../../components/Rows";
+import Columns from "../../components/Columns";
 import { useState } from "react";
 
 export default function AddOstaloScreen() {
@@ -14,8 +14,8 @@ export default function AddOstaloScreen() {
 
   return (
     <View style={addEventStyles.page}>
-      <Rows.RowsContainer gap={50}>
-        <Rows.Row>
+      <Columns.ColumnsContainer gap={50}>
+        <Columns.Column>
           <InputText
             title="Naslov"
             placeholder="Unesi naslov"
@@ -23,9 +23,9 @@ export default function AddOstaloScreen() {
           />
 
           <InputSelect title="Event" style={addEventStyles.inputGap} />
-        </Rows.Row>
+        </Columns.Column>
 
-        <Rows.Row>
+        <Columns.Column>
           <InputDate title="Datum" style={addEventStyles.inputGap} />
 
           <InputSwitch
@@ -35,18 +35,18 @@ export default function AddOstaloScreen() {
           />
 
           {!cijeliDan && (
-            <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
-              <Rows.Row>
+            <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
+              <Columns.Column>
                 <InputTime title="Vrijeme pocetka" />
-              </Rows.Row>
+              </Columns.Column>
               {}
-              <Rows.Row>
+              <Columns.Column>
                 <InputTime title="Vrijeme kraja" />
-              </Rows.Row>
-            </Rows.RowsContainer>
+              </Columns.Column>
+            </Columns.ColumnsContainer>
           )}
-        </Rows.Row>
-      </Rows.RowsContainer>
+        </Columns.Column>
+      </Columns.ColumnsContainer>
       <InputTextArea
         title="Detalji"
         placeholder="Unesi detalje"

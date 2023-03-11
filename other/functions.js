@@ -8,6 +8,19 @@ export const dateToString = (date) => {
   return `${day}.${month}.${year}`;
 };
 
+export const dateAddDays = (date, days) => {
+  const newDate = new Date(date);
+  newDate.setDate(newDate.getDate() + days);
+  return newDate;
+};
+
+export const timeToNumber = (time) => {
+  if (!time) return "";
+  const [hours, minutes, _] = time.split(":");
+
+  return parseInt(hours) + parseInt(minutes) / 60;
+};
+
 export const fetchFn = async (options) => {
   let data, error;
 

@@ -9,16 +9,16 @@ import InputTime from "../../components/input/InputTime";
 import InputPrice from "../../components/input/InputPrice";
 import InputSwitch from "../../components/input/InputSwitch";
 import addEventStyles from "./addEventStyles";
-import Rows from "../../components/Rows";
+import Columns from "../../components/Columns";
 import { useState } from "react";
 
 export default function AddAktivnostiScreen() {
   const [restaurantRequired, setRestaurantRequired] = useState(false);
   return (
     <View style={addEventStyles.page}>
-      <Rows.RowsContainer gap={50}>
+      <Columns.ColumnsContainer gap={50}>
         {}
-        <Rows.Row>
+        <Columns.Column>
           <InputText
             title="Gost"
             placeholder="Unesi gosta"
@@ -31,31 +31,31 @@ export default function AddAktivnostiScreen() {
             placeholder="Unesi cijenu"
             style={addEventStyles.inputGap}
           />
-        </Rows.Row>
+        </Columns.Column>
         {}
-        <Rows.Row>
-          <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
-            <Rows.Row>
+        <Columns.Column>
+          <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
+            <Columns.Column>
               <InputNumber
                 title="Broj odraslih"
                 placeholder="Unesi broj odraslih"
               />
-            </Rows.Row>
+            </Columns.Column>
             {}
-            <Rows.Row>
+            <Columns.Column>
               <InputNumber title="Broj djece" placeholder="Unesi broj djece" />
-            </Rows.Row>
-          </Rows.RowsContainer>
+            </Columns.Column>
+          </Columns.ColumnsContainer>
 
-          <Rows.RowsContainer gap={20} style={addEventStyles.inputGap}>
-            <Rows.Row>
+          <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
+            <Columns.Column>
               <InputTime title="Vrijeme pocetka" />
-            </Rows.Row>
+            </Columns.Column>
             {}
-            <Rows.Row>
+            <Columns.Column>
               <InputTime title="Vrijeme kraja" />
-            </Rows.Row>
-          </Rows.RowsContainer>
+            </Columns.Column>
+          </Columns.ColumnsContainer>
 
           <InputSwitch
             title="Potreban restoran"
@@ -70,9 +70,9 @@ export default function AddAktivnostiScreen() {
               <InputSelect title="Stol/ovi" style={addEventStyles.inputGap} />
             </>
           )}
-        </Rows.Row>
+        </Columns.Column>
         {}
-      </Rows.RowsContainer>
+      </Columns.ColumnsContainer>
       <InputTextArea
         title="Detalji"
         placeholder="Unesi detalje"
