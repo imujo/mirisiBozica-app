@@ -1,13 +1,13 @@
 import { View, Button, Text, Switch } from "react-native";
-import InputTextArea from "../../../components/input/InputTextArea";
-import InputText from "../../../components/input/InputText";
-import InputNumber from "../../../components/input/InputNumber";
-import InputDate from "../../../components/input/InputDate";
-import InputSelect from "../../../components/input/InputSelect";
-import InputPrice from "../../../components/input/InputPrice";
-import InputSwitch from "../../../components/input/InputSwitch";
-import addEventStyles from "../addEventStyles";
-import Rows from "../../../components/Rows";
+import InputTextArea from "../../components/input/InputTextArea";
+import InputText from "../../components/input/InputText";
+import InputNumber from "../../components/input/InputNumber";
+import InputDate from "../../components/input/InputDate";
+import InputSelect from "../../components/input/InputSelect";
+import InputPrice from "../../components/input/InputPrice";
+import InputSwitch from "../../components/input/InputSwitch";
+import addEventStyles from "./addEventStyles";
+import Rows from "../../components/Rows";
 import { useState, useEffect, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -73,7 +73,6 @@ export default function AddApartmentScreen({ route, navigation }) {
 
       navigation.goBack();
     } catch (error) {
-      console.log(error);
       setError(error.response.data);
     } finally {
       setLoading(false);

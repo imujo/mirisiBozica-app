@@ -2,10 +2,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TabNavigationWrapper from "./TabNavigationWrapper";
 import InputSelectScreen from "./stackScreens/InputSelectScreen/InputSelectScreen";
 
-import AddRestaurantScreen from "./stackScreens/AddRestaurantScreen/AddRestaurantScreen";
-import AddAktivnostiScreen from "./stackScreens/AddAktivnostiScreen/AddAktivnostiScreen";
-import AddApartmentScreen from "./stackScreens/AddApartmentScreen/AddApartmentScreen";
-import AddOstaloScreen from "./stackScreens/AddOstaloScreen/AddOstaloScreen";
+import AddRestaurantScreen from "./stackScreens/AddRestaurantScreen";
+import AddAktivnostiScreen from "./stackScreens/AddAktivnostiScreen";
+import AddApartmentScreen from "./stackScreens/AddApartmentScreen";
+import AddOstaloScreen from "./stackScreens/AddOstaloScreen";
 
 const Stack = createNativeStackNavigator();
 

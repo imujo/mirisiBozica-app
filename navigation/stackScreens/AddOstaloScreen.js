@@ -1,12 +1,12 @@
 import { View, Button } from "react-native";
-import InputTextArea from "../../../components/input/InputTextArea";
-import InputText from "../../../components/input/InputText";
-import InputDate from "../../../components/input/InputDate";
-import InputSelect from "../../../components/input/InputSelect";
-import InputTime from "../../../components/input/InputTime";
-import InputSwitch from "../../../components/input/InputSwitch";
-import addEventStyles from "../addEventStyles";
-import Rows from "../../../components/Rows";
+import InputTextArea from "../../components/input/InputTextArea";
+import InputText from "../../components/input/InputText";
+import InputDate from "../../components/input/InputDate";
+import InputSelect from "../../components/input/InputSelect";
+import InputTime from "../../components/input/InputTime";
+import InputSwitch from "../../components/input/InputSwitch";
+import addEventStyles from "./addEventStyles";
+import Rows from "../../components/Rows";
 import { useState } from "react";
 
 export default function AddOstaloScreen() {
