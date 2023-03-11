@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { View, StyleSheet, Button } from "react-native";
-import InputTextArea from "../../components/input/InputTextArea";
 import baseAxios from "../../other/baseAxios";
 
 export default function AddScreen({ navigation, route }) {
