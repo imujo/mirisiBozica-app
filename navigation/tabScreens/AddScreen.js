@@ -29,14 +29,14 @@ export default function AddScreen({ navigation, route }) {
           createEventAndNavigate("/api/event/apartment", "AddApartmentScreen")
         }
       />
-      <Button
+      {/* <Button
         title="Aktivnosti"
         onPress={() => navigation.navigate("AddAktivnostiScreen")}
       />
       <Button
         title="Ostalo"
         onPress={() => navigation.navigate("AddOstaloScreen")}
-      />
+      /> */}
     </View>
   );
 }

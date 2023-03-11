@@ -84,10 +84,6 @@ export default function AddApartmentScreen({ route, navigation }) {
     return <Text>Something went wrong...</Text>;
   }
 
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
     <View style={addEventStyles.page}>
       <Rows.RowsContainer gap={50}>
@@ -190,7 +186,7 @@ export default function AddApartmentScreen({ route, navigation }) {
             errorMsg={error.data?.date_out}
           />
 
-          <InputSwitch
+          {/* <InputSwitch
             title={"Bed & Breakfast"}
             value={formData.bed_and_breakfast}
             setValue={(value) =>
@@ -200,7 +196,7 @@ export default function AddApartmentScreen({ route, navigation }) {
             }
             isError={error.data?.bed_and_breakfast}
             errorMsg={error.data?.bed_and_breakfast}
-          />
+          /> */}
         </Rows.Row>
       </Rows.RowsContainer>
       <InputTextArea
@@ -218,6 +214,7 @@ export default function AddApartmentScreen({ route, navigation }) {
         errorMsg={error.data?.details}
       />
       <Button title="Spremi" onPress={submit} />
+      {loading && <Text>Loading...</Text>}
     </View>
   );
 }

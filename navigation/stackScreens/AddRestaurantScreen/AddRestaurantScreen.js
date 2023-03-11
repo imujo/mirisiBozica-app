@@ -70,7 +70,6 @@ export default function AddRestaurantScreen({ route, navigation }) {
   );
 
   const submit = async () => {
-    setError({});
     const body = {
       guest: formData.guest,
       n_adults: formData.n_adults,
@@ -103,10 +102,6 @@ export default function AddRestaurantScreen({ route, navigation }) {
     return <Text>Something went wrong...</Text>;
   }
 
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
-
   return (
     <View style={addEventStyles.page}>
       <Rows.RowsContainer gap={50}>
@@ -136,7 +131,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
             isError={error.data?.date}
             errorMsg={error.data?.date}
           />
-          <InputSelect
+          {/* <InputSelect
             title="Prostorija"
             style={addEventStyles.inputGap}
             navigation={navigation}
@@ -148,7 +143,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
             selectedError={roomError}
             selectedLoading={roomLoading}
             selectedData={room}
-          />
+          /> */}
           <InputPrice
             title="Cijena"
             placeholder="Unesi cijenu"
@@ -230,7 +225,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
             </Rows.Row>
           </Rows.RowsContainer>
 
-          <InputSelect
+          {/* <InputSelect
             navigation={navigation}
             style={addEventStyles.inputGap}
             title="Stol/ovi"
@@ -244,7 +239,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
             selectedData={tables}
             disabled={!room.length}
             multiple={true}
-          />
+          /> */}
         </Rows.Row>
       </Rows.RowsContainer>
       <InputTextArea
@@ -262,6 +257,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
         errorMsg={error.data?.details}
       />
       <Button title="Spremi" onPress={submit} />
+      {loading && <Text>Loading...</Text>}
     </View>
   );
 }
