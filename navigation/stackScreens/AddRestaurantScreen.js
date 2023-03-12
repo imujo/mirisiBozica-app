@@ -11,6 +11,7 @@ import Columns from "../../components/Columns";
 import { useCallback, useState } from "react";
 import baseAxios from "../../other/baseAxios";
 import { useFocusEffect } from "@react-navigation/native";
+import { dateToUTC } from "../../other/functions";
 
 export default function AddRestaurantScreen({ route, navigation }) {
   const [formData, setFormData] = useState({
@@ -74,8 +75,8 @@ export default function AddRestaurantScreen({ route, navigation }) {
       guest: formData.guest,
       n_adults: formData.n_adults,
       n_children: formData.n_children,
-      start_time: formData.start_time,
-      end_time: formData.end_time,
+      start_time: dateToUTC(formData.start_time),
+      end_time: dateToUTC(formData.end_time),
       date: formData.date,
       price: formData.price,
       details: formData.details,

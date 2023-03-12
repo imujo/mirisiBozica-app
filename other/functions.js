@@ -21,6 +21,35 @@ export const timeToNumber = (time) => {
   return parseInt(hours) + parseInt(minutes) / 60;
 };
 
+export const dateToTimeFormat = (date) => {
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  let hoursString = "";
+  let minutesString = "";
+  if (hours < 10) {
+    hoursString = "0" + hours;
+  } else {
+    hoursString = "" + hours;
+  }
+
+  if (minutes < 10) {
+    minutesString = "0" + minutes;
+  } else {
+    minutesString = "" + minutes;
+  }
+
+  return hoursString + ":" + minutesString;
+};
+
+export const dateToUTC = (date) => {
+  let newDate = new Date();
+  newDate.setUTCHours(date.getHours());
+  newDate.setUTCMinutes(date.getMinutes());
+
+  return newDate;
+};
+
 export const fetchFn = async (options) => {
   let data, error;
 

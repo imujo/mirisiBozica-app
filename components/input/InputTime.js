@@ -4,6 +4,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import Input from "./Input";
 import { inputStyles } from "./helpers/inputStyles";
 import TouchableOpacityRipple from "../TouchableOpacityRipple";
+import { dateToTimeFormat } from "../../other/functions";
 
 export default function InputTime({
   title,
@@ -21,8 +22,6 @@ export default function InputTime({
     setValue(selectedDate);
   };
 
-  const shortTime = value.toTimeString().slice(0, 5);
-
   return (
     <Input
       title={title}
@@ -32,7 +31,7 @@ export default function InputTime({
       onPress={() => setShow(true)}
       style={style}
     >
-      <Text style={inputStyles.inputValue}>{shortTime}</Text>
+      <Text style={inputStyles.inputValue}>{dateToTimeFormat(value)}</Text>
 
       {show && (
         <DateTimePicker

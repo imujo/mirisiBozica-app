@@ -5,7 +5,7 @@ import InputNumber from "../../components/input/InputNumber";
 import InputDate from "../../components/input/InputDate";
 import InputSelect from "../../components/input/InputSelect";
 import InputPrice from "../../components/input/InputPrice";
-import InputSwitch from "../../components/input/InputSwitch";
+// import InputSwitch from "../../components/input/InputSwitch";
 import addEventStyles from "./addEventStyles";
 import Columns from "../../components/Columns";
 import { useState, useEffect, useCallback } from "react";
@@ -86,7 +86,7 @@ export default function AddApartmentScreen({ route, navigation }) {
   return (
     <View style={addEventStyles.page}>
       <Columns.ColumnsContainer gap={50}>
-        <Columns.Row>
+        <Columns.Column>
           <InputText
             title="Gost"
             placeholder="Unesi gosta"
@@ -139,11 +139,11 @@ export default function AddApartmentScreen({ route, navigation }) {
             isError={error.data?.price}
             errorMsg={error.data?.price}
           />
-        </Columns.Row>
+        </Columns.Column>
 
-        <Columns.Row>
+        <Columns.Column>
           <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
-            <Columns.Row>
+            <Columns.Column>
               <InputNumber
                 title="Broj odraslih"
                 placeholder="Unesi broj odraslih"
@@ -156,8 +156,8 @@ export default function AddApartmentScreen({ route, navigation }) {
                 isError={error.data?.n_adults}
                 errorMsg={error.data?.n_adults}
               />
-            </Columns.Row>
-            <Columns.Row>
+            </Columns.Column>
+            <Columns.Column>
               <InputNumber
                 title="Broj djece"
                 placeholder="Unesi broj djece"
@@ -170,7 +170,7 @@ export default function AddApartmentScreen({ route, navigation }) {
                 isError={error.data?.n_children}
                 errorMsg={error.data?.n_children}
               />
-            </Columns.Row>
+            </Columns.Column>
           </Columns.ColumnsContainer>
           <InputDate
             title="Odlazak"
@@ -196,7 +196,7 @@ export default function AddApartmentScreen({ route, navigation }) {
             isError={error.data?.bed_and_breakfast}
             errorMsg={error.data?.bed_and_breakfast}
           /> */}
-        </Columns.Row>
+        </Columns.Column>
       </Columns.ColumnsContainer>
       <InputTextArea
         title="Detalji"

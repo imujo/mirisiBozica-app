@@ -1,14 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
-import Rows from "../Rows";
-import Columns from "../Columns";
-import { timeToNumber, makeLayout } from "../../other/functions";
-import CalendarBackground from "./CalendarBackground";
+import { View, Text, StyleSheet } from "react-native";
+import { makeLayout } from "../../other/functions";
 
-export default function CalendarList({ events, error, loading }) {
-  const hourHeight = 60;
+export default function CalendarList({ events, hourHeight, error, loading }) {
   const layoutEvents = makeLayout(events, hourHeight);
 
+  // TODO - better loading and error visual
   if (loading) {
     return <Text>Loading...</Text>;
   } else if (error) {
@@ -24,6 +21,7 @@ export default function CalendarList({ events, error, loading }) {
       {layoutEvents.map((event, i) => {
         return (
           <View
+            key={i}
             style={[
               styles.item,
               {
@@ -34,7 +32,7 @@ export default function CalendarList({ events, error, loading }) {
               },
             ]}
           >
-            <Text>{event.guest}</Text>
+            <Text>{event.start_time.toString()}</Text>
           </View>
         );
       })}
@@ -44,12 +42,14 @@ export default function CalendarList({ events, error, loading }) {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#cdb4db",
+    backgroundColor: "#92e6a7",
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 6,
     position: "absolute",
     width: "100%",
+    borderTopColor: "#208b3a",
+    borderTopWidth: 8,
   },
   row: {
     flex: 0,

@@ -5,7 +5,7 @@ import Rows from "../Rows";
 
 export default function CalendarBackground({ hourHeight, children }) {
   return (
-    <ScrollView style={{ paddingHorizontal: 10, marginVertical: 20 }}>
+    <ScrollView style={{ paddingHorizontal: 10 }}>
       {/* HOURS COLUMN */}
       <Columns.ColumnsContainer>
         <Columns.Column style={{ flex: 0, width: 60 }}>
@@ -17,10 +17,13 @@ export default function CalendarBackground({ hourHeight, children }) {
                     style={{
                       height: 1,
                       backgroundColor: "lightgray",
-                      width: "100%",
+                      width: "30%",
+                      alignSelf: "flex-end",
                     }}
                   />
-                  <Text>{hour + ":00"}</Text>
+                  {hour != 0 && (
+                    <Text style={styles.hourText}>{hour + ":00"}</Text>
+                  )}
                 </Rows.Row>
               );
             })}
@@ -64,5 +67,10 @@ const styles = StyleSheet.create({
   },
   row: {
     flex: 0,
+  },
+  hourText: {
+    fontSize: 13,
+    position: "absolute",
+    top: "-16%",
   },
 });

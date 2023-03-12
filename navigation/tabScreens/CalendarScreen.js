@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import CalendarNav from "../../components/calendar/CalendarNav";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,6 +7,7 @@ import baseAxios from "../../other/baseAxios";
 import CalendarList from "../../components/calendar/CalendarList";
 import AllDayList from "../../components/calendar/AllDayList";
 import CalendarBackground from "../../components/calendar/CalendarBackground";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function CalendarScreen() {
   const [date, setDate] = useState(new Date());
@@ -31,32 +32,63 @@ export default function CalendarScreen() {
     url: `api/event/apartment/date/${debouncedDate.toISOString()}`,
   };
 
-  useEffect(() => {
-    setLoadingRestaurantEvents(true);
-    baseAxios(getRestaurantFetchOptions)
-      .then((res) => {
-        setRestaurantEvents(res.data.data);
-      })
-      .catch((err) => setErrorRestaurantEvents(true))
-      .finally(() => setLoadingRestaurantEvents(false));
+  useFocusEffect(
+    useCallback(() => {
+      setLoadingRestaurantEvents(true);
+      baseAxios(getRestaurantFetchOptions)
+        .then((res) => {
+          setRestaurantEvents(res.data.data);
+        })
+        .catch((err) => setErrorRestaurantEvents(true))
+        .finally(() => setLoadingRestaurantEvents(false));
 
-    setLoadingApartmentEvents(true);
-    baseAxios(getApartmetnsFetchOptions)
-      .then((res) => {
-        setApartmentEvents(res.data.data);
-      })
-      .catch((err) => setErrorApartmentEvents(true))
-      .finally(() => setLoadingApartmentEvents(false));
+      setLoadingApartmentEvents(true);
+      baseAxios(getApartmetnsFetchOptions)
+        .then((res) => {
+          setApartmentEvents(res.data.data);
+        })
+        .catch((err) => setErrorApartmentEvents(true))
+        .finally(() => setLoadingApartmentEvents(false));
 
-    return () => {
-      setErrorApartmentEvents(false);
-      setErrorRestaurantEvents(false);
-      setLoadingApartmentEvents(false);
-      setLoadingRestaurantEvents(false);
-      setRestaurantEvents([]);
-      setApartmentEvents([]);
-    };
-  }, [debouncedDate]);
+      return () => {
+        setErrorApartmentEvents(false);
+        setErrorRestaurantEvents(false);
+        setLoadingApartmentEvents(false);
+        setLoadingRestaurantEvents(false);
+        setRestaurantEvents([]);
+        setApartmentEvents([]);
+      };
+    }, [debouncedDate])
+  );
+
+  // useEffect(() => {
+  //   setLoadingRestaurantEvents(true);
+  //   baseAxios(getRestaurantFetchOptions)
+  //     .then((res) => {
+  //       setRestaurantEvents(res.data.data);
+  //     })
+  //     .catch((err) => setErrorRestaurantEvents(true))
+  //     .finally(() => setLoadingRestaurantEvents(false));
+
+  //   setLoadingApartmentEvents(true);
+  //   baseAxios(getApartmetnsFetchOptions)
+  //     .then((res) => {
+  //       setApartmentEvents(res.data.data);
+  //     })
+  //     .catch((err) => setErrorApartmentEvents(true))
+  //     .finally(() => setLoadingApartmentEvents(false));
+
+  //   return () => {
+  //     setErrorApartmentEvents(false);
+  //     setErrorRestaurantEvents(false);
+  //     setLoadingApartmentEvents(false);
+  //     setLoadingRestaurantEvents(false);
+  //     setRestaurantEvents([]);
+  //     setApartmentEvents([]);
+  //   };
+  // }, [debouncedDate]);
+
+  const hourHeight = 70;
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -66,11 +98,12 @@ export default function CalendarScreen() {
         loading={loadingApartmentEvents}
         error={errorApartmentEvents}
       />
-      <CalendarBackground hourHeight={60}>
+      <CalendarBackground hourHeight={hourHeight}>
         <CalendarList
           events={restaurantEvents}
           loading={loadingRestaurantEvents}
           error={errorRestaurantEvents}
+          hourHeight={hourHeight}
         />
       </CalendarBackground>
     </SafeAreaView>
