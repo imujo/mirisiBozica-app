@@ -1,8 +1,19 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { dateToString, dateAddDays } from "../../other/functions";
+import { useState } from "react";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function CalendarNav({ date, setDate }) {
+  const [show, setShow] = useState(false);
+
+  const onDateChange = (event, selectedDate) => {
+    setShow(false);
+    if (event.type == "dismissed" || date.getTime() == selectedDate.getTime())
+      return;
+    setDate(selectedDate);
+  };
+
   return (
     <View style={styles.nav}>
       <AntDesign
@@ -12,7 +23,9 @@ export default function CalendarNav({ date, setDate }) {
         color="black"
         onPress={() => setDate((date) => dateAddDays(date, -1))}
       />
-      <Text style={styles.dayText}>{dateToString(date)}</Text>
+      <TouchableOpacity style={{ flex: 5 }} onPress={() => setShow(true)}>
+        <Text style={styles.dayText}>{dateToString(date)}</Text>
+      </TouchableOpacity>
       <AntDesign
         style={styles.icon}
         name="right"
@@ -20,6 +33,15 @@ export default function CalendarNav({ date, setDate }) {
         color="black"
         onPress={() => setDate((date) => dateAddDays(date, 1))}
       />
+
+      {show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={"date"}
+          onChange={onDateChange}
+        />
+      )}
     </View>
   );
 }
@@ -39,7 +61,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   dayText: {
-    flex: 5,
     textAlign: "center",
     fontSize: 30,
   },
