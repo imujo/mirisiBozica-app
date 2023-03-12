@@ -1,4 +1,4 @@
-import { View, Button, Text } from "react-native";
+import { View, Button, Text, BackHandler, Alert } from "react-native";
 import InputTextArea from "../../components/input/InputTextArea";
 import InputText from "../../components/input/InputText";
 import InputNumber from "../../components/input/InputNumber";
@@ -8,7 +8,7 @@ import InputPrice from "../../components/input/InputPrice";
 import InputTime from "../../components/input/InputTime";
 import addEventStyles from "./addEventStyles";
 import Columns from "../../components/Columns";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import baseAxios from "../../other/baseAxios";
 import { useFocusEffect } from "@react-navigation/native";
 import { dateToUTC } from "../../other/functions";
@@ -54,6 +54,14 @@ export default function AddRestaurantScreen({ route, navigation }) {
     },
   };
 
+  const deleteEventFetchOptions = {
+    method: "DELETE",
+    url: `/api/event/restaurant/${eventId}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   useFocusEffect(
     useCallback(() => {
       setRoomLoading(true);
@@ -69,6 +77,40 @@ export default function AddRestaurantScreen({ route, navigation }) {
         .finally(() => setTablesLoading(false));
     }, [])
   );
+
+  const onBackButton = () => {
+    baseAxios(deleteEventFetchOptions)
+      .then(() => {
+        console.log("Event deleted");
+        navigation.goBack();
+      })
+      .catch(() => console.log("Coludnt delete event"));
+  };
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert(
+        "Are you sure you want to exit?",
+        "All data will be lost...",
+        [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "YES", onPress: () => onBackButton() },
+        ]
+      );
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   const submit = async () => {
     const body = {
