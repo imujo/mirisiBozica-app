@@ -12,7 +12,16 @@ export default function AllDayList({ events, loading, error }) {
       {events.map((item, i) => {
         return (
           <View key={i} style={styles.item}>
-            <Text style={styles.text}>{item.guest}</Text>
+            <Text style={[styles.bold, styles.text]}>{item.guest}</Text>
+            {item.n_adults != 0 && (
+              <Text style={styles.text}>Odrasli: {item.n_adults}</Text>
+            )}
+            {item.n_children != 0 && (
+              <Text style={styles.text}>Djeca: {item.n_children}</Text>
+            )}
+            {item.price != 0 && (
+              <Text style={styles.text}>Cijena: €{item.price}</Text>
+            )}
           </View>
         );
       })}
@@ -22,15 +31,25 @@ export default function AllDayList({ events, loading, error }) {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#a2d2ff",
+    backgroundColor: "#aecbeb",
     marginVertical: 3,
     marginHorizontal: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    borderRadius: 10,
+    borderRadius: 6,
+    display: "flex",
+    flexDirection: "row",
+    borderLeftColor: "#00487c",
+    borderLeftWidth: 5,
+  },
+  bold: {
+    fontWeight: "700",
+    marginRight: 15,
+    fontSize: 15,
   },
   text: {
-    fontWeight: "700",
-    color: "white",
+    marginRight: 12,
+    fontSize: 13,
+    color: "#00487c",
   },
 });
