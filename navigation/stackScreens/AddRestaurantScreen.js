@@ -37,6 +37,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
   const [tables, setTables] = useState([]);
 
   const eventId = route.params.event_id;
+  const type = route.params.type;
 
   const getRoomFetchOptions = {
     method: "GET",
@@ -76,9 +77,14 @@ export default function AddRestaurantScreen({ route, navigation }) {
         .catch((err) => setTablesError(true))
         .finally(() => setTablesLoading(false));
     }, [])
+
+    // TODO if type == edit, fetch event data
   );
 
   const onBackButton = () => {
+    if (route.params.type == "edit") {
+      return navigation.goBack();
+    }
     baseAxios(deleteEventFetchOptions)
       .then(() => {
         // TODO add alert that event is deleted

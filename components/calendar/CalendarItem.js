@@ -1,31 +1,48 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import TouchableOpacityRipple from "../TouchableOpacityRipple";
 
-export default function CalendarItem({ event }) {
+export default function CalendarItem({ event, navigation }) {
   return (
-    <View
-      style={[
-        styles.item,
-        {
-          top: event.layout.top,
-          height: event.layout.height,
-          left: `${event.layout.left}%`,
-          width: `${event.layout.width}%`,
-        },
-      ]}
+    <TouchableNativeFeedback
+      onPress={() =>
+        navigation.navigate("AddRestaurantScreen", {
+          event_id: event.event_id,
+          type: "edit",
+        })
+      }
     >
-      <Text style={[styles.text, styles.bold]}>{event.guest}</Text>
-      <View style={styles.otherProps}>
-        {event.n_adults != 0 && (
-          <Text style={styles.text}>Odrasli: {event.n_adults}</Text>
-        )}
-        {event.n_children != 0 && (
-          <Text style={styles.text}>Djeca: {event.n_children}</Text>
-        )}
-        {event.price != 0 && (
-          <Text style={styles.text}>Cijena: €{event.price}</Text>
-        )}
+      <View
+        style={[
+          styles.item,
+          {
+            top: event.layout.top,
+            height: event.layout.height,
+            left: `${event.layout.left}%`,
+            width: `${event.layout.width}%`,
+          },
+        ]}
+      >
+        <Text style={[styles.text, styles.bold]}>{event.guest}</Text>
+        <View style={styles.otherProps}>
+          {event.n_adults != 0 && (
+            <Text style={styles.text}>Odrasli: {event.n_adults}</Text>
+          )}
+          {event.n_children != 0 && (
+            <Text style={styles.text}>Djeca: {event.n_children}</Text>
+          )}
+          {event.price != 0 && (
+            <Text style={styles.text}>Cijena: €{event.price}</Text>
+          )}
+        </View>
       </View>
-    </View>
+    </TouchableNativeFeedback>
   );
 }
 

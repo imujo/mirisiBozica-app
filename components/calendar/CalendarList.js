@@ -3,7 +3,13 @@ import { View, Text, StyleSheet } from "react-native";
 import { makeLayout } from "../../other/functions";
 import CalendarItem from "./CalendarItem";
 
-export default function CalendarList({ events, hourHeight, error, loading }) {
+export default function CalendarList({
+  events,
+  hourHeight,
+  error,
+  loading,
+  navigation,
+}) {
   const layoutEvents = makeLayout(events, hourHeight);
 
   // TODO - better loading and error visual
@@ -20,7 +26,7 @@ export default function CalendarList({ events, hourHeight, error, loading }) {
   return (
     <>
       {layoutEvents.map((event, i) => {
-        return <CalendarItem event={event} key={i} />;
+        return <CalendarItem event={event} key={i} navigation={navigation} />;
       })}
     </>
   );

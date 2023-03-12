@@ -9,7 +9,7 @@ import AllDayList from "../../components/calendar/AllDayList";
 import CalendarBackground from "../../components/calendar/CalendarBackground";
 import { useFocusEffect } from "@react-navigation/native";
 
-export default function CalendarScreen() {
+export default function CalendarScreen({ navigation }) {
   const [date, setDate] = useState(new Date());
 
   const [loadingRestaurantEvents, setLoadingRestaurantEvents] = useState(false);
@@ -104,6 +104,7 @@ export default function CalendarScreen() {
           loading={loadingRestaurantEvents}
           error={errorRestaurantEvents}
           hourHeight={hourHeight}
+          navigation={navigation}
         />
       </CalendarBackground>
     </SafeAreaView>
