@@ -1,4 +1,4 @@
-import { View, Button, Text, Switch } from "react-native";
+import { View, Button, Text, Switch, BackHandler, Alert } from "react-native";
 import InputTextArea from "../../components/input/InputTextArea";
 import InputText from "../../components/input/InputText";
 import InputNumber from "../../components/input/InputNumber";
@@ -78,6 +78,48 @@ export default function AddApartmentScreen({ route, navigation }) {
       setLoading(false);
     }
   };
+
+  const deleteEventFetchOptions = {
+    method: "DELETE",
+    url: `/api/event/apartment/${eventId}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const onBackButton = () => {
+    baseAxios(deleteEventFetchOptions)
+      .then(() => {
+        // TODO add alert that event is deleted
+        navigation.goBack();
+      })
+      .catch(() => console.log("Coludnt delete event"));
+  };
+
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert(
+        "Are you sure you want to exit?",
+        "All data will be lost...",
+        [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel",
+          },
+          { text: "YES", onPress: () => onBackButton() },
+        ]
+      );
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   if (error && "type" in error && error?.type != "ValidationError") {
     return <Text>Something went wrong...</Text>;

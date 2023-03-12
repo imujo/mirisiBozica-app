@@ -81,7 +81,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
   const onBackButton = () => {
     baseAxios(deleteEventFetchOptions)
       .then(() => {
-        console.log("Event deleted");
+        // TODO add alert that event is deleted
         navigation.goBack();
       })
       .catch(() => console.log("Coludnt delete event"));
