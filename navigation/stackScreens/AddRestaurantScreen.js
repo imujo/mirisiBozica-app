@@ -111,7 +111,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
   );
 
   const onBackButton = () => {
-    if (route.params.type == "edit") {
+    if (type == "edit") {
       return navigation.goBack();
     }
     baseAxios(deleteEventFetchOptions)

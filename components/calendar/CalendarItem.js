@@ -21,7 +21,9 @@ export default function CalendarItem({ event, navigation }) {
           },
         ]}
       >
-        <Text style={[styles.text, styles.bold]}>{event.guest}</Text>
+        <Text style={[styles.text, styles.bold]}>
+          {event.guest} | {event.start_time} - {event.end_time}
+        </Text>
         <View style={styles.otherProps}>
           {event.n_adults != 0 && (
             <Text style={styles.text}>Odrasli: {event.n_adults}</Text>

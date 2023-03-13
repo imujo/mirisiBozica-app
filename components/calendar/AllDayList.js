@@ -1,6 +1,6 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
 
-export default function AllDayList({ events, loading, error }) {
+export default function AllDayList({ events, loading, error, navigation }) {
   if (loading) {
     return <Text>Loading...</Text>;
   } else if (error) {
@@ -11,18 +11,28 @@ export default function AllDayList({ events, loading, error }) {
     <View>
       {events.map((item, i) => {
         return (
-          <View key={i} style={styles.item}>
-            <Text style={[styles.bold, styles.text]}>{item.guest}</Text>
-            {item.n_adults != 0 && (
-              <Text style={styles.text}>Odrasli: {item.n_adults}</Text>
-            )}
-            {item.n_children != 0 && (
-              <Text style={styles.text}>Djeca: {item.n_children}</Text>
-            )}
-            {item.price != 0 && (
-              <Text style={styles.text}>Cijena: €{item.price}</Text>
-            )}
-          </View>
+          <TouchableNativeFeedback
+            key={i}
+            onPress={() => {
+              navigation.navigate("AddApartmentScreen", {
+                event_id: item.event_id,
+                type: "edit",
+              });
+            }}
+          >
+            <View style={styles.item}>
+              <Text style={[styles.bold, styles.text]}>{item.guest}</Text>
+              {item.n_adults != 0 && (
+                <Text style={styles.text}>Odrasli: {item.n_adults}</Text>
+              )}
+              {item.n_children != 0 && (
+                <Text style={styles.text}>Djeca: {item.n_children}</Text>
+              )}
+              {item.price != 0 && (
+                <Text style={styles.text}>Cijena: €{item.price}</Text>
+              )}
+            </View>
+          </TouchableNativeFeedback>
         );
       })}
     </View>

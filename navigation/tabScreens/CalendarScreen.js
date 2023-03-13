@@ -70,6 +70,7 @@ export default function CalendarScreen({ navigation }) {
         events={apartmentEvents}
         loading={loadingApartmentEvents}
         error={errorApartmentEvents}
+        navigation={navigation}
       />
       <CalendarBackground hourHeight={hourHeight}>
         <CalendarList

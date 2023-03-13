@@ -13,6 +13,7 @@ import { useFocusEffect } from "@react-navigation/native";
 
 export default function AddApartmentScreen({ route, navigation }) {
   const eventId = route.params.event_id;
+  const type = route.params.type;
 
   const [formData, setFormData] = useState({
     guest: "",
@@ -40,6 +41,14 @@ export default function AddApartmentScreen({ route, navigation }) {
     },
   };
 
+  const fetchEventDataOptions = {
+    method: "GET",
+    url: `/api/event/apartment/${eventId}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   useFocusEffect(
     useCallback(() => {
       setApartmentsLoading(true);
@@ -47,6 +56,28 @@ export default function AddApartmentScreen({ route, navigation }) {
         .then((res) => setApartments(res.data.data))
         .catch((err) => setApartmentsError(true))
         .finally(() => setApartmentsLoading(false));
+
+      if (type == "edit") {
+        setLoading(true);
+        baseAxios(fetchEventDataOptions)
+          .then((res) => {
+            setFormData((prev) => {
+              const data = res.data.data;
+              return {
+                ...prev,
+                details: data.details,
+                date_in: new Date(data.date_in),
+                date_out: new Date(data.date_out),
+                guest: data.guest,
+                price: data.price.toString(),
+                n_adults: data.n_adults.toString(),
+                n_children: data.n_children.toString(),
+              };
+            });
+          })
+          .catch((err) => setError(true))
+          .finally(() => setLoading(false));
+      }
     }, [])
   );
 
@@ -88,6 +119,9 @@ export default function AddApartmentScreen({ route, navigation }) {
   };
 
   const onBackButton = () => {
+    if (type == "edit") {
+      return navigation.goBack();
+    }
     baseAxios(deleteEventFetchOptions)
       .then(() => {
         // TODO add alert that event is deleted
