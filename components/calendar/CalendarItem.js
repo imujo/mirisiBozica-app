@@ -1,12 +1,4 @@
-import {
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import TouchableOpacityRipple from "../TouchableOpacityRipple";
+import { StyleSheet, Text, TouchableNativeFeedback, View } from "react-native";
 
 export default function CalendarItem({ event, navigation }) {
   return (

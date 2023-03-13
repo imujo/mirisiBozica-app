@@ -61,33 +61,6 @@ export default function CalendarScreen({ navigation }) {
     }, [debouncedDate])
   );
 
-  // useEffect(() => {
-  //   setLoadingRestaurantEvents(true);
-  //   baseAxios(getRestaurantFetchOptions)
-  //     .then((res) => {
-  //       setRestaurantEvents(res.data.data);
-  //     })
-  //     .catch((err) => setErrorRestaurantEvents(true))
-  //     .finally(() => setLoadingRestaurantEvents(false));
-
-  //   setLoadingApartmentEvents(true);
-  //   baseAxios(getApartmetnsFetchOptions)
-  //     .then((res) => {
-  //       setApartmentEvents(res.data.data);
-  //     })
-  //     .catch((err) => setErrorApartmentEvents(true))
-  //     .finally(() => setLoadingApartmentEvents(false));
-
-  //   return () => {
-  //     setErrorApartmentEvents(false);
-  //     setErrorRestaurantEvents(false);
-  //     setLoadingApartmentEvents(false);
-  //     setLoadingRestaurantEvents(false);
-  //     setRestaurantEvents([]);
-  //     setApartmentEvents([]);
-  //   };
-  // }, [debouncedDate]);
-
   const hourHeight = 70;
 
   return (

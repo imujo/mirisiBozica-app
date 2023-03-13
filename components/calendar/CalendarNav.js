@@ -8,6 +8,7 @@ export default function CalendarNav({ date, setDate }) {
   const [show, setShow] = useState(false);
 
   const onDateChange = (event, selectedDate) => {
+    console.log(selectedDate.toISOString());
     setShow(false);
     if (event.type == "dismissed" || date.getTime() == selectedDate.getTime())
       return;

@@ -11,7 +11,7 @@ import Columns from "../../components/Columns";
 import { useCallback, useEffect, useState } from "react";
 import baseAxios from "../../other/baseAxios";
 import { useFocusEffect } from "@react-navigation/native";
-import { dateToUTC } from "../../other/functions";
+import { dateToUTC, timeStringToDate } from "../../other/functions";
 
 export default function AddRestaurantScreen({ route, navigation }) {
   const [formData, setFormData] = useState({
@@ -63,6 +63,14 @@ export default function AddRestaurantScreen({ route, navigation }) {
     },
   };
 
+  const fetchEventDataOptions = {
+    method: "GET",
+    url: `/api/event/restaurant/${eventId}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
   useFocusEffect(
     useCallback(() => {
       setRoomLoading(true);
@@ -76,9 +84,30 @@ export default function AddRestaurantScreen({ route, navigation }) {
         .then((res) => setTables(res.data.data))
         .catch((err) => setTablesError(true))
         .finally(() => setTablesLoading(false));
-    }, [])
 
-    // TODO if type == edit, fetch event data
+      if (type == "edit") {
+        setLoading(true);
+        baseAxios(fetchEventDataOptions)
+          .then((res) => {
+            setFormData((prev) => {
+              const data = res.data.data;
+              return {
+                ...prev,
+                date: new Date(data.date),
+                details: data.details,
+                end_time: timeStringToDate(data.end_time),
+                start_time: timeStringToDate(data.start_time),
+                guest: data.guest,
+                price: data.price.toString(),
+                n_adults: data.n_adults.toString(),
+                n_children: data.n_children.toString(),
+              };
+            });
+          })
+          .catch((err) => setError(true))
+          .finally(() => setLoading(false));
+      }
+    }, [])
   );
 
   const onBackButton = () => {
@@ -97,7 +126,9 @@ export default function AddRestaurantScreen({ route, navigation }) {
     const backAction = () => {
       Alert.alert(
         "Are you sure you want to exit?",
-        "All data will be lost...",
+        type == "edit"
+          ? "All changes will be lost..."
+          : "All data will be lost...",
         [
           {
             text: "Cancel",

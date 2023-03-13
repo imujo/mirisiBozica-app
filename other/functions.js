@@ -21,6 +21,13 @@ export const timeToNumber = (time) => {
   return parseInt(hours) + parseInt(minutes) / 60;
 };
 
+export const timeStringToDate = (timeString) => {
+  if (!timeString) return undefined;
+  const [hours, minutes, _] = timeString.split(":");
+
+  return new Date(0, 0, 0, hours, minutes);
+};
+
 export const dateToTimeFormat = (date) => {
   const hours = date.getHours();
   const minutes = date.getMinutes();
