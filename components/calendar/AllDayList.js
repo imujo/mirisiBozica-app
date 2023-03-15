@@ -2,13 +2,13 @@ import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native";
 
 export default function AllDayList({ events, loading, error, navigation }) {
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <Text style={{ height: 35 }}>Loading...</Text>;
   } else if (error) {
     return <Text>Error</Text>;
   }
 
   return (
-    <View>
+    <View style={{ minHeight: 35 }}>
       {events.map((item, i) => {
         return (
           <TouchableNativeFeedback
@@ -48,9 +48,11 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 6,
     display: "flex",
+    alignItems: "center",
     flexDirection: "row",
     borderLeftColor: "#00487c",
     borderLeftWidth: 5,
+    height: 30,
   },
   bold: {
     fontWeight: "700",

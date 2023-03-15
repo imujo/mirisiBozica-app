@@ -21,10 +21,12 @@ export default function CalendarItem({ event, navigation }) {
           },
         ]}
       >
-        <Text style={[styles.text, styles.bold]}>
-          {event.guest} | {event.start_time} - {event.end_time}
-        </Text>
+        <Text style={[styles.text, styles.bold]}>{event.guest}</Text>
+
         <View style={styles.otherProps}>
+          <Text style={styles.text}>
+            {event.start_time.slice(0, 5)} - {event.end_time.slice(0, 5)}
+          </Text>
           {event.n_adults != 0 && (
             <Text style={styles.text}>Odrasli: {event.n_adults}</Text>
           )}
@@ -60,7 +62,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#10451d",
     marginBottom: 3,
-    marginRight: 20,
     fontSize: 15,
   },
   text: {
