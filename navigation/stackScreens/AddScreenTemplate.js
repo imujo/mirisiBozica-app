@@ -11,6 +11,8 @@ export default function AddScreenTemplate({
   setAllFormData,
   formError,
   formLoading,
+  setFormError,
+  setFormLoading,
 }) {
   const onBackButton = () => {
     if (type == "edit") {
@@ -55,12 +57,32 @@ export default function AddScreenTemplate({
   useEffect(() => {
     if (type == "edit") {
       setFormLoading(true);
-      baseAxios(fetchEventDataOptions)
+      baseAxios({
+        method: "get",
+        url: `/api/event/${eventType}/${eventId}`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((res) => setAllFormData(res.data.data))
         .catch((err) => setFormError(err))
         .finally(() => setFormLoading(false));
     }
   }, []);
+
+  const deleteEvent = () => {
+    setFormLoading(true);
+    baseAxios({
+      method: "delete",
+      url: `/api/event/${eventType}/${eventId}`,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => navigation.goBack())
+      .catch((err) => setFormError(err))
+      .finally(() => setFormLoading(false));
+  };
 
   return (
     <View style={addEventStyles.page}>
@@ -69,6 +91,7 @@ export default function AddScreenTemplate({
       {formError && formError.type != "ValidationError" && <Text>Error</Text>}
 
       <Button title="Spremi" onPress={onSubmit} />
+      {type == "edit" && <Button title="Izbrisi" onPress={deleteEvent} />}
     </View>
   );
 }

@@ -10,6 +10,7 @@ import addEventStyles from "./addEventStyles";
 import Columns from "../../components/Columns";
 import { useState, useEffect, useCallback } from "react";
 import { useFocusEffect } from "@react-navigation/native";
+import AddScreenTemplate from "./AddScreenTemplate";
 
 export default function AddApartmentScreen({ route, navigation }) {
   const eventId = route.params.event_id;
@@ -25,9 +26,8 @@ export default function AddApartmentScreen({ route, navigation }) {
     price: 0,
     details: "",
   });
-
-  const [error, setError] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [formError, setFormError] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
 
   const [apartmentsLoading, setApartmentsLoading] = useState(false);
   const [apartmentsError, setApartmentsError] = useState(false);
@@ -41,14 +41,6 @@ export default function AddApartmentScreen({ route, navigation }) {
     },
   };
 
-  const fetchEventDataOptions = {
-    method: "GET",
-    url: `/api/event/apartment/${eventId}`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
   useFocusEffect(
     useCallback(() => {
       setApartmentsLoading(true);
@@ -56,33 +48,11 @@ export default function AddApartmentScreen({ route, navigation }) {
         .then((res) => setApartments(res.data.data))
         .catch((err) => setApartmentsError(true))
         .finally(() => setApartmentsLoading(false));
-
-      if (type == "edit") {
-        setLoading(true);
-        baseAxios(fetchEventDataOptions)
-          .then((res) => {
-            setFormData((prev) => {
-              const data = res.data.data;
-              return {
-                ...prev,
-                details: data.details,
-                date_in: new Date(data.date_in),
-                date_out: new Date(data.date_out),
-                guest: data.guest,
-                price: data.price.toString(),
-                n_adults: data.n_adults.toString(),
-                n_children: data.n_children.toString(),
-              };
-            });
-          })
-          .catch((err) => setError(true))
-          .finally(() => setLoading(false));
-      }
     }, [])
   );
 
-  const submit = async () => {
-    setError({});
+  const submitForm = async () => {
+    setFormError({});
     const body = {
       guest: formData.guest,
       n_adults: formData.n_adults,
@@ -94,7 +64,7 @@ export default function AddApartmentScreen({ route, navigation }) {
       details: formData.details,
     };
 
-    setLoading(true);
+    setFormLoading(true);
     try {
       await baseAxios.request({
         method: "PUT",
@@ -104,164 +74,142 @@ export default function AddApartmentScreen({ route, navigation }) {
 
       navigation.goBack();
     } catch (error) {
-      setError(error.response.data);
+      setFormError(error.response.data);
     } finally {
-      setLoading(false);
+      setFormLoading(false);
     }
   };
 
-  const deleteEventFetchOptions = {
-    method: "DELETE",
-    url: `/api/event/apartment/${eventId}`,
-    headers: {
-      "Content-Type": "application/json",
-    },
+  const setAllFormData = (data) => {
+    setFormData((prev) => {
+      return {
+        ...prev,
+        details: data.details,
+        date_in: new Date(data.date_in),
+        date_out: new Date(data.date_out),
+        guest: data.guest,
+        price: data.price.toString(),
+        n_adults: data.n_adults.toString(),
+        n_children: data.n_children.toString(),
+      };
+    });
   };
-
-  const onBackButton = () => {
-    if (type == "edit") {
-      return navigation.goBack();
-    }
-    baseAxios(deleteEventFetchOptions)
-      .then(() => {
-        // TODO add alert that event is deleted
-        navigation.goBack();
-      })
-      .catch(() => console.log("Coludnt delete event"));
-  };
-
-  useEffect(() => {
-    const backAction = () => {
-      Alert.alert(
-        "Are you sure you want to exit?",
-        "All data will be lost...",
-        [
-          {
-            text: "Cancel",
-            onPress: () => null,
-            style: "cancel",
-          },
-          { text: "YES", onPress: () => onBackButton() },
-        ]
-      );
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
-
-  if (error && "type" in error && error?.type != "ValidationError") {
-    return <Text>Something went wrong...</Text>;
-  }
 
   return (
-    <View style={addEventStyles.page}>
-      <Columns.ColumnsContainer gap={50}>
-        <Columns.Column>
-          <InputText
-            title="Gost"
-            placeholder="Unesi gosta"
-            style={addEventStyles.inputGap}
-            value={formData.guest}
-            setValue={(value) =>
-              setFormData((prev) => {
-                return { ...prev, guest: value };
-              })
-            }
-            isError={error.data?.guest}
-            errorMsg={error.data?.guest}
-          />
-          <InputDate
-            title="Dolazak"
-            style={addEventStyles.inputGap}
-            value={formData.date_in}
-            setValue={(value) =>
-              setFormData((prev) => {
-                return { ...prev, date_in: value };
-              })
-            }
-            isError={error.data?.date_in}
-            errorMsg={error.data?.date_in}
-          />
-          <InputSelect
-            title="Apartman/i"
-            style={addEventStyles.inputGap}
-            navigation={navigation}
-            fetchUrls={{
-              getSelected: `/api/event/apartment/apartments/${eventId}`,
-              putSelected: `/api/event/apartment/apartments/${eventId}`,
-              getOptions: `/api/apartment/all`,
-            }}
-            multiple={true}
-            selectedError={apartmentsError}
-            selectedLoading={apartmentsLoading}
-            selectedData={apartments}
-          />
-          <InputPrice
-            title="Cijena"
-            placeholder="Unesi cijenu"
-            style={addEventStyles.inputGap}
-            value={formData.price}
-            setValue={(value) =>
-              setFormData((prev) => {
-                return { ...prev, price: value };
-              })
-            }
-            isError={error.data?.price}
-            errorMsg={error.data?.price}
-          />
-        </Columns.Column>
+    <AddScreenTemplate
+      eventId={eventId}
+      type={type}
+      eventType={"apartment"}
+      navigation={navigation}
+      onSubmit={submitForm}
+      setAllFormData={setAllFormData}
+      formLoading={formLoading}
+      formError={formError}
+      setFormError={setFormError}
+      setFormLoading={setFormLoading}
+    >
+      <View>
+        <Columns.ColumnsContainer gap={50}>
+          <Columns.Column>
+            <InputText
+              title="Gost"
+              placeholder="Unesi gosta"
+              style={addEventStyles.inputGap}
+              value={formData.guest}
+              setValue={(value) =>
+                setFormData((prev) => {
+                  return { ...prev, guest: value };
+                })
+              }
+              isError={formError.data?.guest}
+              errorMsg={formError.data?.guest}
+            />
+            <InputDate
+              title="Dolazak"
+              style={addEventStyles.inputGap}
+              value={formData.date_in}
+              setValue={(value) =>
+                setFormData((prev) => {
+                  return { ...prev, date_in: value };
+                })
+              }
+              isError={formError.data?.date_in}
+              errorMsg={formError.data?.date_in}
+            />
+            <InputSelect
+              title="Apartman/i"
+              style={addEventStyles.inputGap}
+              navigation={navigation}
+              fetchUrls={{
+                getSelected: `/api/event/apartment/apartments/${eventId}`,
+                putSelected: `/api/event/apartment/apartments/${eventId}`,
+                getOptions: `/api/apartment/all`,
+              }}
+              multiple={true}
+              selectedError={apartmentsError}
+              selectedLoading={apartmentsLoading}
+              selectedData={apartments}
+            />
+            <InputPrice
+              title="Cijena"
+              placeholder="Unesi cijenu"
+              style={addEventStyles.inputGap}
+              value={formData.price}
+              setValue={(value) =>
+                setFormData((prev) => {
+                  return { ...prev, price: value };
+                })
+              }
+              isError={formError.data?.price}
+              errorMsg={formError.data?.price}
+            />
+          </Columns.Column>
 
-        <Columns.Column>
-          <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
-            <Columns.Column>
-              <InputNumber
-                title="Broj odraslih"
-                placeholder="Unesi broj odraslih"
-                value={formData.n_adults}
-                setValue={(value) =>
-                  setFormData((prev) => {
-                    return { ...prev, n_adults: value };
-                  })
-                }
-                isError={error.data?.n_adults}
-                errorMsg={error.data?.n_adults}
-              />
-            </Columns.Column>
-            <Columns.Column>
-              <InputNumber
-                title="Broj djece"
-                placeholder="Unesi broj djece"
-                value={formData.n_children}
-                setValue={(value) =>
-                  setFormData((prev) => {
-                    return { ...prev, n_children: value };
-                  })
-                }
-                isError={error.data?.n_children}
-                errorMsg={error.data?.n_children}
-              />
-            </Columns.Column>
-          </Columns.ColumnsContainer>
-          <InputDate
-            title="Odlazak"
-            style={addEventStyles.inputGap}
-            value={formData.date_out}
-            setValue={(value) =>
-              setFormData((prev) => {
-                return { ...prev, date_out: value };
-              })
-            }
-            isError={error.data?.date_out}
-            errorMsg={error.data?.date_out}
-          />
+          <Columns.Column>
+            <Columns.ColumnsContainer gap={20} style={addEventStyles.inputGap}>
+              <Columns.Column>
+                <InputNumber
+                  title="Broj odraslih"
+                  placeholder="Unesi broj odraslih"
+                  value={formData.n_adults}
+                  setValue={(value) =>
+                    setFormData((prev) => {
+                      return { ...prev, n_adults: value };
+                    })
+                  }
+                  isError={formError.data?.n_adults}
+                  errorMsg={formError.data?.n_adults}
+                />
+              </Columns.Column>
+              <Columns.Column>
+                <InputNumber
+                  title="Broj djece"
+                  placeholder="Unesi broj djece"
+                  value={formData.n_children}
+                  setValue={(value) =>
+                    setFormData((prev) => {
+                      return { ...prev, n_children: value };
+                    })
+                  }
+                  isError={formError.data?.n_children}
+                  errorMsg={formError.data?.n_children}
+                />
+              </Columns.Column>
+            </Columns.ColumnsContainer>
+            <InputDate
+              title="Odlazak"
+              style={addEventStyles.inputGap}
+              value={formData.date_out}
+              setValue={(value) =>
+                setFormData((prev) => {
+                  return { ...prev, date_out: value };
+                })
+              }
+              isError={formError.data?.date_out}
+              errorMsg={formError.data?.date_out}
+            />
 
-          {/* <InputSwitch
+            {/* <InputSwitch
             title={"Bed & Breakfast"}
             value={formData.bed_and_breakfast}
             setValue={(value) =>
@@ -272,24 +220,23 @@ export default function AddApartmentScreen({ route, navigation }) {
             isError={error.data?.bed_and_breakfast}
             errorMsg={error.data?.bed_and_breakfast}
           /> */}
-        </Columns.Column>
-      </Columns.ColumnsContainer>
-      <InputTextArea
-        title="Detalji"
-        placeholder="Unesi detalje"
-        numberOfLines={7}
-        style={addEventStyles.inputGap}
-        value={formData.details}
-        setValue={(value) =>
-          setFormData((prev) => {
-            return { ...prev, details: value };
-          })
-        }
-        isError={error.data?.details}
-        errorMsg={error.data?.details}
-      />
-      <Button title="Spremi" onPress={submit} />
-      {loading && <Text>Loading...</Text>}
-    </View>
+          </Columns.Column>
+        </Columns.ColumnsContainer>
+        <InputTextArea
+          title="Detalji"
+          placeholder="Unesi detalje"
+          numberOfLines={7}
+          style={addEventStyles.inputGap}
+          value={formData.details}
+          setValue={(value) =>
+            setFormData((prev) => {
+              return { ...prev, details: value };
+            })
+          }
+          isError={formError.data?.details}
+          errorMsg={formError.data?.details}
+        />
+      </View>
+    </AddScreenTemplate>
   );
 }
