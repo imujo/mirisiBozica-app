@@ -1,16 +1,16 @@
-import { View, Button, Text, BackHandler, Alert } from "react-native";
+import { View } from "react-native";
 import InputTextArea from "../../components/input/InputTextArea";
 import InputText from "../../components/input/InputText";
 import InputNumber from "../../components/input/InputNumber";
 import InputDate from "../../components/input/InputDate";
-import InputSelect from "../../components/input/InputSelect";
+// import InputSelect from "../../components/input/InputSelect";
 import InputPrice from "../../components/input/InputPrice";
 import InputTime from "../../components/input/InputTime";
 import addEventStyles from "./addEventStyles";
 import Columns from "../../components/Columns";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import baseAxios from "../../other/baseAxios";
-import { useFocusEffect } from "@react-navigation/native";
+// import { useFocusEffect } from "@react-navigation/native";
 import { dateToUTC, timeStringToDate } from "../../other/functions";
 import AddScreenTemplate from "./AddScreenTemplate";
 
@@ -28,112 +28,8 @@ export default function AddRestaurantScreen({ route, navigation }) {
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState(false);
 
-  // const [roomLoading, setRoomLoading] = useState(false);
-  // const [roomError, setRoomError] = useState(false);
-  // const [room, setRoom] = useState({});
-
-  // const [tablesLoading, setTablesLoading] = useState(false);
-  // const [tablesError, setTablesError] = useState(false);
-  // const [tables, setTables] = useState([]);
-
   const eventId = route.params.event_id;
   const type = route.params.type;
-
-  const getRoomFetchOptions = {
-    method: "GET",
-    url: `/api/event/restaurant/room/${eventId}`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const getTablesFetchOptions = {
-    method: "GET",
-    url: `/api/event/restaurant/tables/${eventId}`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const deleteEventFetchOptions = {
-    method: "DELETE",
-    url: `/api/event/restaurant/${eventId}`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  const fetchEventDataOptions = {
-    method: "GET",
-    url: `/api/event/restaurant/${eventId}`,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     // setRoomLoading(true);
-  //     // baseAxios(getRoomFetchOptions)
-  //     //   .then((res) => setRoom(res.data.data))
-  //     //   .catch((err) => setRoomError(true))
-  //     //   .finally(() => setRoomLoading(false));
-
-  //     // setTablesLoading(true);
-  //     // baseAxios(getTablesFetchOptions)
-  //     //   .then((res) => setTables(res.data.data))
-  //     //   .catch((err) => setTablesError(true))
-  //     //   .finally(() => setTablesLoading(false));
-
-  //     if (type == "edit") {
-  //       setLoading(true);
-  //       baseAxios(fetchEventDataOptions)
-  //         .then((res) => {
-  //           setFormData((prev) => {
-  //             const data = res.data.data;
-  //             return {
-  //               ...prev,
-  //               date: new Date(data.date),
-  //               details: data.details,
-  //               end_time: timeStringToDate(data.end_time),
-  //               start_time: timeStringToDate(data.start_time),
-  //               guest: data.guest,
-  //               price: data.price.toString(),
-  //               n_adults: data.n_adults.toString(),
-  //               n_children: data.n_children.toString(),
-  //             };
-  //           });
-  //         })
-  //         .catch((err) => setError(true))
-  //         .finally(() => setLoading(false));
-  //     }
-  //   }, [])
-  // );
-
-  useEffect(() => {
-    if (type == "edit") {
-      setFormLoading(true);
-      baseAxios(fetchEventDataOptions)
-        .then((res) => {
-          setFormData((prev) => {
-            const data = res.data.data;
-            return {
-              ...prev,
-              date: new Date(data.date),
-              details: data.details,
-              end_time: timeStringToDate(data.end_time),
-              start_time: timeStringToDate(data.start_time),
-              guest: data.guest,
-              price: data.price.toString(),
-              n_adults: data.n_adults.toString(),
-              n_children: data.n_children.toString(),
-            };
-          });
-        })
-        .catch((err) => setFormError(true))
-        .finally(() => setFormLoading(false));
-    }
-  }, []);
 
   const body = {
     guest: formData.guest,
@@ -145,7 +41,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
     price: formData.price,
     details: formData.details,
   };
-  const submitForm = async (boy) => {
+  const submitForm = async () => {
     setFormLoading(true);
     try {
       await baseAxios.request({
@@ -219,19 +115,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
               isError={formError.data?.date}
               errorMsg={formError.data?.date}
             />
-            {/* <InputSelect
-            title="Prostorija"
-            style={addEventStyles.inputGap}
-            navigation={navigation}
-            fetchUrls={{
-              getSelected: `/api/event/restaurant/room/${eventId}`,
-              putSelected: `/api/event/restaurant/room/${eventId}`,
-              getOptions: `/api/room/all`,
-            }}
-            selectedError={roomError}
-            selectedLoading={roomLoading}
-            selectedData={room}
-          /> */}
+
             <InputPrice
               title="Cijena"
               placeholder="Unesi cijenu"
@@ -312,22 +196,6 @@ export default function AddRestaurantScreen({ route, navigation }) {
                 />
               </Columns.Column>
             </Columns.ColumnsContainer>
-
-            {/* <InputSelect
-            navigation={navigation}
-            style={addEventStyles.inputGap}
-            title="Stol/ovi"
-            fetchUrls={{
-              getSelected: `/api/event/restaurant/tables/${eventId}`,
-              putSelected: `/api/event/restaurant/tables/${eventId}`,
-              getOptions: `/api/table/all_room/${room[0]?.id}`,
-            }}
-            selectedError={tablesError}
-            selectedLoading={tablesLoading}
-            selectedData={tables}
-            disabled={!room.length}
-            multiple={true}
-          /> */}
           </Columns.Column>
         </Columns.ColumnsContainer>
         <InputTextArea
@@ -348,3 +216,98 @@ export default function AddRestaurantScreen({ route, navigation }) {
     </AddScreenTemplate>
   );
 }
+
+{
+  /* <InputSelect
+            title="Prostorija"
+            style={addEventStyles.inputGap}
+            navigation={navigation}
+            fetchUrls={{
+              getSelected: `/api/event/restaurant/room/${eventId}`,
+              putSelected: `/api/event/restaurant/room/${eventId}`,
+              getOptions: `/api/room/all`,
+            }}
+            selectedError={roomError}
+            selectedLoading={roomLoading}
+            selectedData={room}
+          /> */
+}
+{
+  /* <InputSelect
+            navigation={navigation}
+            style={addEventStyles.inputGap}
+            title="Stol/ovi"
+            fetchUrls={{
+              getSelected: `/api/event/restaurant/tables/${eventId}`,
+              putSelected: `/api/event/restaurant/tables/${eventId}`,
+              getOptions: `/api/table/all_room/${room[0]?.id}`,
+            }}
+            selectedError={tablesError}
+            selectedLoading={tablesLoading}
+            selectedData={tables}
+            disabled={!room.length}
+            multiple={true}
+          /> */
+}
+// const getRoomFetchOptions = {
+//   method: "GET",
+//   url: `/api/event/restaurant/room/${eventId}`,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// };
+
+// const getTablesFetchOptions = {
+//   method: "GET",
+//   url: `/api/event/restaurant/tables/${eventId}`,
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// };
+
+// useFocusEffect(
+//   useCallback(() => {
+//     // setRoomLoading(true);
+//     // baseAxios(getRoomFetchOptions)
+//     //   .then((res) => setRoom(res.data.data))
+//     //   .catch((err) => setRoomError(true))
+//     //   .finally(() => setRoomLoading(false));
+
+//     // setTablesLoading(true);
+//     // baseAxios(getTablesFetchOptions)
+//     //   .then((res) => setTables(res.data.data))
+//     //   .catch((err) => setTablesError(true))
+//     //   .finally(() => setTablesLoading(false));
+
+//     if (type == "edit") {
+//       setLoading(true);
+//       baseAxios(fetchEventDataOptions)
+//         .then((res) => {
+//           setFormData((prev) => {
+//             const data = res.data.data;
+//             return {
+//               ...prev,
+//               date: new Date(data.date),
+//               details: data.details,
+//               end_time: timeStringToDate(data.end_time),
+//               start_time: timeStringToDate(data.start_time),
+//               guest: data.guest,
+//               price: data.price.toString(),
+//               n_adults: data.n_adults.toString(),
+//               n_children: data.n_children.toString(),
+//             };
+//           });
+//         })
+//         .catch((err) => setError(true))
+//         .finally(() => setLoading(false));
+//     }
+//   }, [])
+// );
+
+// const [roomLoading, setRoomLoading] = useState(false);
+// const [roomError, setRoomError] = useState(false);
+// const [room, setRoom] = useState({});
+
+// const [tablesLoading, setTablesLoading] = useState(false);
+// const [tablesError, setTablesError] = useState(false);
+// const [tables, setTables] = useState([]);
