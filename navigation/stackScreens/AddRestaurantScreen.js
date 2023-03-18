@@ -28,13 +28,13 @@ export default function AddRestaurantScreen({ route, navigation }) {
   const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const [roomLoading, setRoomLoading] = useState(false);
-  const [roomError, setRoomError] = useState(false);
-  const [room, setRoom] = useState({});
+  // const [roomLoading, setRoomLoading] = useState(false);
+  // const [roomError, setRoomError] = useState(false);
+  // const [room, setRoom] = useState({});
 
-  const [tablesLoading, setTablesLoading] = useState(false);
-  const [tablesError, setTablesError] = useState(false);
-  const [tables, setTables] = useState([]);
+  // const [tablesLoading, setTablesLoading] = useState(false);
+  // const [tablesError, setTablesError] = useState(false);
+  // const [tables, setTables] = useState([]);
 
   const eventId = route.params.event_id;
   const type = route.params.type;
@@ -73,17 +73,17 @@ export default function AddRestaurantScreen({ route, navigation }) {
 
   useFocusEffect(
     useCallback(() => {
-      setRoomLoading(true);
-      baseAxios(getRoomFetchOptions)
-        .then((res) => setRoom(res.data.data))
-        .catch((err) => setRoomError(true))
-        .finally(() => setRoomLoading(false));
+      // setRoomLoading(true);
+      // baseAxios(getRoomFetchOptions)
+      //   .then((res) => setRoom(res.data.data))
+      //   .catch((err) => setRoomError(true))
+      //   .finally(() => setRoomLoading(false));
 
-      setTablesLoading(true);
-      baseAxios(getTablesFetchOptions)
-        .then((res) => setTables(res.data.data))
-        .catch((err) => setTablesError(true))
-        .finally(() => setTablesLoading(false));
+      // setTablesLoading(true);
+      // baseAxios(getTablesFetchOptions)
+      //   .then((res) => setTables(res.data.data))
+      //   .catch((err) => setTablesError(true))
+      //   .finally(() => setTablesLoading(false));
 
       if (type == "edit") {
         setLoading(true);
@@ -177,7 +177,7 @@ export default function AddRestaurantScreen({ route, navigation }) {
     }
   };
 
-  if (error && "type" in error && error?.type != "ValidationError") {
+  if (error && error?.type != "ValidationError") {
     return <Text>Something went wrong...</Text>;
   }
 
