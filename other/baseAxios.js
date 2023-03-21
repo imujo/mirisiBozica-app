@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default baseAxios = axios.create({
-  baseURL: "http://10.0.2.2:3001",
+  baseURL: "https://opgplaner-server-production.up.railway.app/",
 });
